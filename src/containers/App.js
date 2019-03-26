@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-
+import { BrowserRouter as Router, Switch, Route,  Redirect } from "react-router-dom"
 
 class App extends Component {
   render() {
@@ -9,7 +8,12 @@ class App extends Component {
         <Router>
           <>
             <Switch>
+              {/* unauthed paths */}
               <Route exact path="/" render={ _ => <h1>home</h1> }/>
+
+              <Redirect to="/"/>
+
+              {/* authed paths */}
             </Switch>
           </>
         </Router>
