@@ -2,23 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './containers/App'
 import * as serviceWorker from './serviceWorker'
-import "./firebase"
-
-// user context
-let user = {
-  authed: false,
-}
-
-const UserContext = React.createContext(user);
+import { auth } from "./firebase"
+import UserContext from "./UserContext"
 
 
-ReactDOM.render((
-  <UserContext.Provider value={ user }>
-    <App />
-  </UserContext.Provider>
-), document.getElementById('root'))
+//HACK: used in order to fix automatic url redirection
+let authListener = auth.onAuthStateChanged(e => {
+    authListener()
+    ReactDOM.render((
+        <App />
+    ), document.getElementById('root'))
+})
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+//TODO: make loading thing
+// ReactDOM.render((
+//     <Loading />
+// ), document.getElementById('root'))
+
 serviceWorker.unregister()
