@@ -2,9 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './containers/App'
 import * as serviceWorker from './serviceWorker'
-import "./firebase/index.js"
+import "./firebase"
 
-ReactDOM.render(<App />, document.getElementById('root'))
+// user context
+let user = {
+  authed: false,
+}
+
+const UserContext = React.createContext(user);
+
+
+ReactDOM.render((
+  <UserContext.Provider value={ user }>
+    <App />
+  </UserContext.Provider>
+), document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
