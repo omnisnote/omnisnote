@@ -25,13 +25,41 @@ function createUser(user) {
   })
 }
 
-function createTxtNote(title = "new note", content = "") {
-  const uid = getUser().collection("text-notes-titles").doc().id
-  getUser().collection("text-notes-title").doc(uid).set({ title })
+function createTxtNote(title = "new note", content = "", notebook = "__NONE__") {
+  const uid = getUser().collection("text-notes-meta").doc().id
+  // seperated in order to allow for large content without heavy preformance hits
+  getUser().collection("text-notes-meta").doc(uid).set({ 
+    title,
+    notebook,
+    tags: []
+  })
   getUser().collection("text-notes-content").doc(uid).set({ content })
   return uid
 }
 
+function getTxtNote(uid) {
+  return new Promise((resolve, reject) => {
+    getUser().collection("text-notes-meta").doc(uid).get().then(title => {
+      getUser().collection("text-notes-content").doc(uid).get().then(content => {
+        const note = { 
+          title: title.data(), 
+          content: content.data()
+        }
+        resolve(note)
+      })
+    })
+  })
+}
+
+function getNoteList(notebook = "__NONE__") { //TODO: error handling
+  return new Promise((resolve, reject) => {
+    getUser().collection("text-notes-meta").where("notebook", "==", notebook).get().then(res => {
+      resolve(res.docs.map(d => d.data()))
+    })
+  })
+}
+
+window.getNoteList = getNoteList
 window.createTxtNote = createTxtNote
 
 export default firestore

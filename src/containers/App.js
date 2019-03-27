@@ -27,17 +27,14 @@ class App extends Component {
       userData: auth.currentUser || {},
       userSettings: { theme: "light" },
       onAuth: (user => {
-        // throw new Error("test")
         if(!user) return
         createUser(user)
         getUser().get().then(res => {
-          res.ref.get().then(res => {
-            if(!res.exists) return
-            this.setState({ 
-              authed: !!user,
-              userData: user,
-              userSettings: res.data().settings
-            })
+          if(!res.exists) return
+          this.setState({ 
+            authed: !!user,
+            userData: user,
+            userSettings: res.data().settings
           })
         })
       }).bind(this)
