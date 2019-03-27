@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import App from './containers/App'
 import * as serviceWorker from './serviceWorker'
 import { auth } from "./firebase"
-import UserContext from "./UserContext"
 
+import "./styles/style.css"
 
 //HACK: used in order to fix automatic url redirection
 let authListener = auth.onAuthStateChanged(e => {

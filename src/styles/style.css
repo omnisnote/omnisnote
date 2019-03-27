@@ -1,0 +1,10 @@
+a, a:hover, a:active, a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

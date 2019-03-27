@@ -47,13 +47,6 @@ class App extends Component {
   render() { return (
     <div className="app">
       <UserContext.Provider value={ this.state }>
-          <Global styles={ theme => ({
-            "*": {
-              margin: 0,
-              padding: 0,
-              boxSizing: "border-box"
-            }
-          })} />
           <Router>
             <>
               { this.state.authed ? (<>
@@ -61,10 +54,11 @@ class App extends Component {
                   {/* authed */}
                   <Global styles={ theme => ({
                     body: {
-                      backgroundColor: theme.background
+                      backgroundColor: theme.background,
+                      marginTop: theme.headerHeight,
+                      fontFamily: "'Open Sans', sans-serif"
                     }
                   })} />
-                  <Header />
                   <Switch>
                     <Route exact path="/" render={ _ => (<>
                       <h1>home - authed</h1> 
