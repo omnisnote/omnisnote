@@ -53,7 +53,7 @@ class App extends Component {
                     body: {
                       backgroundColor: theme.background,
                       marginTop: theme.headerHeight,
-                    }
+                    },
                   })} />
                   <Switch>
                     <Route exact path="/" render={ _ => (<>

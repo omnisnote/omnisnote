@@ -8,9 +8,6 @@ function getUser() {
   return firestore.collection("users").doc(auth.currentUser.uid)
 }
 
-window.getUser = getUser
-
-
 function createUser(user) {
   getUser().get().then(res => {
     if(!res.exists) {
@@ -25,7 +22,7 @@ function createUser(user) {
   })
 }
 
-function createTxtNote(title = "new note", content = "", notebook = "__NONE__") {
+function createTxtNote(title = "new note", notebook = "__NONE__", content = "") {
   const uid = getUser().collection("text-notes-meta").doc().id
   // seperated in order to allow for large content without heavy preformance hits
   getUser().collection("text-notes-meta").doc(uid).set({ 
@@ -63,4 +60,4 @@ window.getNoteList = getNoteList
 window.createTxtNote = createTxtNote
 
 export default firestore
-export { getUser, createUser }
+export { getUser, createUser, createTxtNote, getTxtNote, getNoteList }
