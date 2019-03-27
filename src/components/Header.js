@@ -9,8 +9,25 @@ const NavLink = props => (
   <li css={ theme => ({
     display: "inline-block",
     margin: "0 8px",
+    position: "relative",
     ":hover": {
-      color: "purple"
+      color: "#000",
+      ":after": {
+        opacity: 1,
+        bottom: 0
+      }
+    },
+    ":after": {
+      content: "''",
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "1px",
+      bottom: "4px",
+      opacity: 0,
+      transition: theme.transition("0.1s"),
+      left: 0,
+      backgroundColor: "#000"
     }
   }) }>
     <Link to={ props.href }>{ props.children }</Link>

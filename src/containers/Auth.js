@@ -20,7 +20,6 @@ export default class Auth extends Component {
       { ({ onAuth }) => (
         <div className="auth">
           <h1>Auth</h1>
-
           <button onClick={ 
             e => auth.signInWithPopup(this.state.googleProvider).then(res => {
               // onAuth(res)

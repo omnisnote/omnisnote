@@ -8,3 +8,7 @@ a, a:hover, a:active, a:focus {
   margin: 0;
   padding: 0;
 }
+
+body {
+  fontFamily: 'Open Sans', sans-serif;
+}

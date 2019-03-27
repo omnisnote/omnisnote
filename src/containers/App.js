@@ -30,7 +30,7 @@ class App extends Component {
         // throw new Error("test")
         if(!user) return
         createUser(user)
-        getUser().then(res => {
+        getUser().get().then(res => {
           res.ref.get().then(res => {
             if(!res.exists) return
             this.setState({ 
@@ -56,7 +56,6 @@ class App extends Component {
                     body: {
                       backgroundColor: theme.background,
                       marginTop: theme.headerHeight,
-                      fontFamily: "'Open Sans', sans-serif"
                     }
                   })} />
                   <Switch>
