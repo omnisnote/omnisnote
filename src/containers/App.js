@@ -42,29 +42,33 @@ class App extends Component {
   render() { return (
     <div className="app">
       <UserContext.Provider value={ this.state }>
-        <ThemeProvider theme={ themes[this.state.userSettings.theme] }>
           <Global styles={ theme => ({
             "*": {
               margin: 0,
-              padding: 0
-            },
-            body: {
-              backgroundColor: theme.background
+              padding: 0,
+              boxSizing: "border-box"
             }
           })} />
           <Router>
             <>
               { this.state.authed ? (<>
-                {/* authed */}
-                <Header />
-                <Switch>
-                  <Route exact path="/" render={ _ => (<>
-                    <h1>home - authed</h1> 
-                    <button onClick={ e => auth.signOut() }>signOut</button>
-                  </>) }/>
-                  <Route exact path="/notes" component={ Notes }/>
-                  <Redirect to="/notes"/>
-                </Switch>
+                <ThemeProvider theme={ themes[this.state.userSettings.theme] }>
+                  {/* authed */}
+                  <Global styles={ theme => ({
+                    body: {
+                      backgroundColor: theme.background
+                    }
+                  })} />
+                  <Header />
+                  <Switch>
+                    <Route exact path="/" render={ _ => (<>
+                      <h1>home - authed</h1> 
+                      <button onClick={ e => auth.signOut() }>signOut</button>
+                    </>) }/>
+                    <Route exact path="/notes" component={ Notes }/>
+                    <Redirect to="/notes"/>
+                  </Switch>
+                </ThemeProvider>
               </>) : (<>
                 {/* unauthed */}
                 <Switch>
@@ -81,7 +85,6 @@ class App extends Component {
               </>) }
             </>
           </Router>
-        </ThemeProvider>
       </UserContext.Provider>
     </div>
   )}
