@@ -16,8 +16,8 @@ function createUser(user) {
     if(!res.exists) {
       firestore.collection("users").doc(user.uid).set({
         settings: {
-          theme: "hecka",
-          email: user.email // strictly for identification in the db
+          theme: "light",
+          email: user.email // strictly for identification in the db, should not be used in the app
         }
       })
     }

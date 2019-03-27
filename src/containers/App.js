@@ -4,7 +4,7 @@ import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
 import auth from "../firebase/auth.js"
-import { createUser } from "../firebase/firestore.js"
+import { createUser, getUser } from "../firebase/firestore.js"
 
 import Auth from "./Auth.js"
 import Notes from "./Notes.js"
@@ -25,15 +25,20 @@ class App extends Component {
     this.state = {
       authed: auth.currentUser || false,
       userData: auth.currentUser || {},
-      userSettings: { theme: "light" }, //TODO: make this fetch settings
+      userSettings: { theme: "light" },
       onAuth: (user => {
         // throw new Error("test")
         if(!user) return
         createUser(user)
-        this.setState({ 
-          authed: !!user,
-          userData: user,
-          userSettings: { theme: "light" }
+        getUser().then(res => {
+          res.ref.get().then(res => {
+            if(!res.exists) return
+            this.setState({ 
+              authed: !!user,
+              userData: user,
+              userSettings: res.data().settings
+            })
+          })
         })
       }).bind(this)
     }
