@@ -23,6 +23,7 @@ export default class Auth extends Component {
           <button onClick={ 
             e => auth.signInWithPopup(this.state.googleProvider).then(res => {
               onAuth(res)
+              this.props.history.push("/")
             }).catch(console.log) }
           >Sign in with google</button>
         </div>

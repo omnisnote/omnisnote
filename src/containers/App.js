@@ -20,7 +20,6 @@ class App extends Component {
           authed: !!user,
           userData: user
         })
-        // if(user) this.props.history.push("/")
       }).bind(this)
     }
   }
