@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Switch, Route,  Redirect } from "react-router-dom"
-import { auth, firebase} from "../firebase"
+import { auth, firebase } from "../firebase"
 
 import UserContext from "../UserContext"
+
 
 export default class Auth extends Component {
   constructor(props) {
@@ -22,10 +23,10 @@ export default class Auth extends Component {
 
           <button onClick={ 
             e => auth.signInWithPopup(this.state.googleProvider).then(res => {
-              onAuth(res)
+              // onAuth(res)
               this.props.history.push("/")
             }).catch(console.log) }
-          >Sign in with google</button>
+          >Continue with Google</button>
         </div>
       ) }
     </UserContext.Consumer>
