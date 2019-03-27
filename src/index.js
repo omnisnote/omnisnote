@@ -9,8 +9,7 @@ let user = {
   authed: false,
 }
 
-const UserContext = React.createContext(user);
-
+const UserContext = React.createContext(user)
 
 ReactDOM.render((
   <UserContext.Provider value={ user }>
