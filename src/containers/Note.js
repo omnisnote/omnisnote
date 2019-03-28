@@ -7,6 +7,8 @@ import EasyMDE from "easymde"
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
 
 import Header from "../components/Header.js"
+import ConfirmInput from "../components/ConfirmInput.js"
+import Loading from "../components/Loading.js"
 
 import editorStyles from "../styles/editorStyles.js"
 
@@ -69,10 +71,8 @@ export default class Note extends Component {
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
-          <h1 css={ theme => ({ 
-            marginBottom: "16px" 
-          }) }>{ this.state.title }</h1>
-        </> ) : "" }
+          <ConfirmInput defaultValue={ this.state.title }/>
+        </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>
       </div>

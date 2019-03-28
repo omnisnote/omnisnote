@@ -4,7 +4,10 @@ import { css, jsx } from '@emotion/core'
 import { Link } from "react-router-dom"
 
 import Header from "../components/Header.js"
+import Loading from "../components/Loading.js"
+
 import MaterialIcon from "material-icons-react"
+
 import { getNoteList, createTxtNote } from "../firebase/firestore.js"
 
 const P = props => (
@@ -20,7 +23,8 @@ export default class Notes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      notebook: props.match.params.notebook || "__NONE__"
+      notebook: props.match.params.notebook || "__NONE__",
+      notes: null
     }
     getNoteList().then(res => this.setState({ notes: res }))
   }
@@ -42,7 +46,7 @@ export default class Notes extends Component {
         fontWeight: 300,
         margin: "8px 0"
       }}>Notes</h1>
-      { this.state.notes && this.state.notes.map((note, i) => (
+      { this.state.notes ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({
             backgroundColor: theme.background,
@@ -62,7 +66,7 @@ export default class Notes extends Component {
             {/* should also show last edit time, and tags */}
           </div>
         </Link>
-      ))}
+      )) : <Loading /> }
 
       <div css={ theme => ({
         position: "fixed",
