@@ -26,6 +26,17 @@ export default class Note extends Component {
       this.setState({ 
         ...note, 
         note: true,
+        editor: new EasyMDE({ 
+          element: this.editor,
+          initialValue: note.content,
+          autofocus: true,
+          toolbar: true,
+          toolbarTips: false,
+          parsingConfig: {
+            allowAtxHeaderWithoutSpace: true,
+            strikethrough: true,
+          }, 
+        })
       })
     })
   }
@@ -42,39 +53,32 @@ export default class Note extends Component {
   }
 
   componentWillUnmount() {
-    this.saveNote(this.props.match.params.uid, this.state)
+    this.saveNote(this.props.match.params.uid, {
+      ...this.state,
+      content: this.state.editor.value()
+    })
   }
 
   componentDidMount() {
-    this.setState({
-      editor: new EasyMDE({ 
-        element: this.editor,
-        autofocus: true,
-        toolbar: true,
-        toolbarTips: false,
-        parsingConfig: {
-          allowAtxHeaderWithoutSpace: true,
-          strikethrough: true,
-        }, 
-      })
-    })
+    
   }
 
   render() { return (
     <div className="note">
       <Header />
-      <Global styles={ theme => editorStyles(theme) } />
+      <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
       <div css={ theme => ({
         margin: "84px auto 12px",
         width: "95%",
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
+          <h1 css={ theme => ({ 
+            marginBottom: "16px" 
+          }) }>{ this.state.title }</h1>
         </> ) : "" }
         <textarea ref={ el => this.editor = el }
-          style={{
-            // display: this.state.note ? "block" : "none"
-          }}></textarea>
+                  style={{ display: "none" }}></textarea>
       </div>
     </div>
   )}
