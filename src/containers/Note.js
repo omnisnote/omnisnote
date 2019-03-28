@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import { css, jsx } from '@emotion/core'
 
+import easyMDE from "easymde"
+
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
 
 import Header from "../components/Header.js"
@@ -11,15 +13,20 @@ export default class Note extends Component {
     super(props)
 
     this.state = {
-      note: null
+      note: null,
     }
+
+    this.editor = React.createRef()
 
     this.getNote(props.match.params.uid)
   }
 
   getNote(uid) {
     getTxtNote(uid).then(note => {
-      this.setState({ ...note, note: true })
+      this.setState({ 
+        ...note, 
+        note: true,
+      })
     })
   }
 
@@ -38,6 +45,9 @@ export default class Note extends Component {
     this.saveNote(this.props.match.params.uid, this.state)
   }
 
+  componentDidMount() {
+  }
+
   render() { return (
     <div className="note">
       <Header />
@@ -47,7 +57,7 @@ export default class Note extends Component {
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
-          <textarea value={ this.state.content } onChange={ e => this.setState({ content: e.target.value }) }></textarea>
+          <textarea value={ this.state.content } ref={ this.editor }></textarea>
         </> ) : "" }
       </div>
     </div>

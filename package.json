@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.10",
+    "easymde": "^2.5.1",
     "emotion-theming": "^10.0.10",
     "firebase": "^5.9.1",
     "material-icons-react": "^1.0.4",
