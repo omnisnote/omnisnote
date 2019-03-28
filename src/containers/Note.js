@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
-import { css, jsx } from '@emotion/core'
+import { css, jsx, Global } from '@emotion/core'
 
-import easyMDE from "easymde"
+import EasyMDE from "easymde"
 
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
 
 import Header from "../components/Header.js"
+
+import editorStyles from "../styles/editorStyles.js"
 
 export default class Note extends Component {
   constructor(props) {
@@ -15,8 +17,6 @@ export default class Note extends Component {
     this.state = {
       note: null,
     }
-
-    this.editor = React.createRef()
 
     this.getNote(props.match.params.uid)
   }
@@ -46,19 +46,35 @@ export default class Note extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      editor: new EasyMDE({ 
+        element: this.editor,
+        autofocus: true,
+        toolbar: true,
+        toolbarTips: false,
+        parsingConfig: {
+          allowAtxHeaderWithoutSpace: true,
+          strikethrough: true,
+        }, 
+      })
+    })
   }
 
   render() { return (
     <div className="note">
       <Header />
+      <Global styles={ theme => editorStyles(theme) } />
       <div css={ theme => ({
-        margin: "32px auto 12px",
+        margin: "84px auto 12px",
         width: "95%",
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
-          <textarea value={ this.state.content } ref={ this.editor }></textarea>
         </> ) : "" }
+        <textarea ref={ el => this.editor = el }
+          style={{
+            // display: this.state.note ? "block" : "none"
+          }}></textarea>
       </div>
     </div>
   )}

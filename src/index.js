@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker'
 import { auth } from "./firebase"
 
 import "./styles/style.css"
+import "./styles/easymde.css"
 
 //HACK: used in order to fix automatic url redirection
 let authListener = auth.onAuthStateChanged(e => {
