@@ -51,6 +51,19 @@ function getTxtNote(uid) {
   })
 }
 
+function setTxtNote(uid, data) {
+  console.log(data)
+  getUser().collection("text-notes-meta").doc(uid).set({
+    title: data.title,
+    tags: data.tags,
+    lastEdit: new Date().toDateString(),
+    notebook: data.notebook
+  })
+  getUser().collection("text-notes-content").doc(uid).set({
+    content: data.content,
+  })
+}
+
 function getNoteList(notebook = "__NONE__") { //TODO: error handling
   return new Promise((resolve, reject) => {
     getUser().collection("text-notes-meta").where("notebook", "==", notebook).get().then(res => {
@@ -60,4 +73,4 @@ function getNoteList(notebook = "__NONE__") { //TODO: error handling
 }
 
 export default firestore
-export { getUser, createUser, createTxtNote, getTxtNote, getNoteList }
+export { getUser, createUser, createTxtNote, getTxtNote, getNoteList, setTxtNote }

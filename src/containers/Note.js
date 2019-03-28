@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { css, jsx } from '@emotion/core'
 
-import { getTxtNote } from "../firebase/firestore.js"
+import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
 
 import Header from "../components/Header.js"
 
@@ -11,28 +11,34 @@ export default class Note extends Component {
     super(props)
 
     this.state = {
-      uid: props.match.params.uid,
       note: null
     }
 
-    this.getNoteContent()
+    this.getNote(props.match.params.uid)
   }
 
-  getNoteContent() {
-    getTxtNote(this.state.uid).then(note => {
+  getNote(uid) {
+    getTxtNote(uid).then(note => {
       this.setState({ ...note, note: true })
     })
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if(state && (props.match.params.uid === state.uid)) return state
-    this.getNoteContent()
-    return {
-      uid: props.uid,
+  saveNote(uid, state) {
+    setTxtNote(uid, state)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps && (prevProps.match.params.uid !== this.props.match.params.uid)) {
+      this.getNote(this.props.match.params.uid)
+      this.saveNote(prevProps.match.params.uid, prevState)
     }
   }
 
-  render() { console.log(this.state); return (
+  componentWillUnmount() {
+    this.saveNote(this.props.match.params.uid, this.state)
+  }
+
+  render() { return (
     <div className="note">
       <Header />
       <div css={ theme => ({
@@ -40,9 +46,9 @@ export default class Note extends Component {
         width: "95%",
         maxWidth: theme.maxWidth
       })}>
-        { this.state.note ? (
-          <p>{ this.state.content }</p>
-        ) : "" }
+        { this.state.note ? ( <>
+          <textarea value={ this.state.content } onChange={ e => this.setState({ content: e.target.value }) }></textarea>
+        </> ) : "" }
       </div>
     </div>
   )}
