@@ -56,10 +56,6 @@
 	width: 0
 }
 
-.CodeMirror div.CodeMirror-secondarycursor {
-	border-left: 1px solid silver
-}
-
 .cm-fat-cursor .CodeMirror-cursor {
 	width: auto;
 	border: 0!important;

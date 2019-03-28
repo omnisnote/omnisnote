@@ -58,11 +58,7 @@ export default class Note extends Component {
       content: this.state.editor.value()
     })
   }
-
-  componentDidMount() {
-    
-  }
-
+  
   render() { return (
     <div className="note">
       <Header />
