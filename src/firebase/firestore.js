@@ -39,11 +39,11 @@ window.createTxtNote = createTxtNote
 
 function getTxtNote(uid) {
   return new Promise((resolve, reject) => {
-    getUser().collection("text-notes-meta").doc(uid).get().then(title => {
+    getUser().collection("text-notes-meta").doc(uid).get().then(meta => {
       getUser().collection("text-notes-content").doc(uid).get().then(content => {
         const note = { 
-          title: title.data(), 
-          content: content.data()
+          ...meta.data(), 
+          ...content.data()
         }
         resolve(note)
       })

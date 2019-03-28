@@ -8,8 +8,9 @@ import UserContext from "../UserContext.js"
 const NavLink = props => (
   <li css={ theme => ({
     display: "inline-block",
-    margin: "0 8px",
+    margin: "0 16px 0 0",
     position: "relative",
+    cursor: "pointer",
     ":hover": {
       color: "#000",
       ":after": {
@@ -50,21 +51,27 @@ export default function Header(props) {
           float: "right",
         }
       }) }>
-        <nav css={ theme => ({
-          float: "left",
-          height: theme.headerHeight,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginLeft: "16px"
-        }) }>
-          <ul css={ theme => ({ listStyle: "none" })}>
-            <NavLink href="/notes/">Notes</NavLink>
-            <NavLink href="/templates/">Templates</NavLink>
-            <NavLink href="/notebooks/">Notebooks</NavLink>
-            <NavLink href="/tags/">Tags</NavLink>
-          </ul>
-        </nav>
+        <div css={ theme => ({
+          margin: "0 auto",
+          width: "95%",
+          maxWidth: theme.maxWidth
+        })}>
+          <nav css={ theme => ({
+            float: "left",
+            height: theme.headerHeight,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "0px"
+          }) }>
+            <ul css={ theme => ({ listStyle: "none" })}>
+              <NavLink href="/notes/">Notes</NavLink>
+              <NavLink href="/templates/">Templates</NavLink>
+              <NavLink href="/notebooks/">Notebooks</NavLink>
+              <NavLink href="/tags/">Tags</NavLink>
+            </ul>
+          </nav>
+        </div>
         <Link to="/user">
           <img css={ theme => ({
             height: theme.headerHeight,

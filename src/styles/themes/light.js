@@ -4,6 +4,7 @@ const light = {
   body: "#f1f1f1",
   main: "#7a42a5",
   headerHeight: "56px",
+  maxWidth: "1280px",
   transition: (t = "0.2s") => t + " ease-in-out all"
 }
 

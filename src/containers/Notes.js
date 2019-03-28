@@ -32,11 +32,11 @@ export default class Notes extends Component {
 
   render() { return ( <>
     <Header />
-    <div className="notes" css={{
+    <div className="notes" css={ theme => ({
       margin: "32px auto 12px",
       width: "95%",
-      maxWidth: "1280px"
-    }}>
+      maxWidth: theme.maxWidth
+    })}>
       <h1 css={{
         fontSize: "42px",
         fontWeight: 300,
@@ -49,9 +49,12 @@ export default class Notes extends Component {
             padding: "8px",
             borderRadius: "2px",
             marginBottom: "4px",
+            cursor: "pointer",
+            borderLeft: "4px transparent solid",
             transition: theme.transition("0.1s"),
             ":hover": {
-              boxShadow: "0 6px 12px -4px rgba(0,0,0,0.2)"
+              boxShadow: "0 6px 12px -4px rgba(0,0,0,0.2)",
+              borderLeft: `4px ${ theme.main } solid`
             }
           })}>
             <P>{ note.title }</P>
@@ -74,10 +77,10 @@ export default class Notes extends Component {
           borderRadius: "50%",
           border: "none",
           cursor: "pointer",
-          boxShadow: "0 4px 12px -8px rgba(0,0,0,0.4)",
-          transition: theme.transition(),
+          boxShadow: "0 4px 8px -2px rgba(0,0,0,0.4)",
+          transition: theme.transition("0.3s"),
           ":hover": {
-            boxShadow: "0 8px 16px -12px rgba(0,0,0,0.4)",  
+            boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
           }
         })}
         onClick={ this.createNote.bind(this) }
