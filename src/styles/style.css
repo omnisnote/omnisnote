@@ -12,3 +12,7 @@ a, a:hover, a:active, a:focus {
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+.material-icons {
+  vertical-align: middle;
+}

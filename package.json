@@ -6,6 +6,7 @@
     "@emotion/core": "^10.0.10",
     "emotion-theming": "^10.0.10",
     "firebase": "^5.9.1",
+    "material-icons-react": "^1.0.4",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-helmet": "^5.2.0",

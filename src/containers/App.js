@@ -8,6 +8,7 @@ import { createUser, getUser } from "../firebase/firestore.js"
 
 import Auth from "./Auth.js"
 import Notes from "./Notes.js"
+import Note from "./Note.js"
 
 import UserContext from "../UserContext.js"
 import themes from "../styles/themes.js"
@@ -51,7 +52,7 @@ class App extends Component {
                   {/* authed */}
                   <Global styles={ theme => ({
                     body: {
-                      backgroundColor: theme.background,
+                      backgroundColor: theme.body,
                       marginTop: theme.headerHeight,
                     },
                   })} />
@@ -61,6 +62,8 @@ class App extends Component {
                       <button onClick={ e => auth.signOut() }>signOut</button>
                     </>) }/>
                     <Route exact path="/notes" component={ Notes }/>
+                    <Route exact path="/:notebook/notes" component={ Notes }/>
+                    <Route exact path="/note/:uid" component={ Note }/>
                     <Redirect to="/notes"/>
                   </Switch>
                 </ThemeProvider>
