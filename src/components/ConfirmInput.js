@@ -8,10 +8,19 @@ export default function ConfirmInput(props) {
   return (
     <div css={ theme => ({
       display: "flex",
-      width: "100%"
+      width: "100%",
+      marginBottom: "16px",
+      ...props.style
     }) }>
-      <input type="text" defaultValue={ props.defaultValue } />
-      <button><MaterialIcon icon="check" /></button>
+      <input type="text" 
+        defaultValue={ props.defaultValue } 
+        css={ theme => ({
+          flex: 1,
+          border: "none",
+          outline: "none",
+          boxShadow: "0 8px 8px -6px rgba(0,0,0,0.1)",
+          padding: "8px 16px",
+        }) } onBlur={ e => props.confirm(e) }/>
     </div>
   )
 }

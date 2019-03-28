@@ -71,7 +71,10 @@ export default class Note extends Component {
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
-          <ConfirmInput defaultValue={ this.state.title }/>
+          <ConfirmInput defaultValue={ this.state.title } style={{
+            maxWidth: "64px",
+            input: { fontSize: "24px" }
+          }} />
         </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>
