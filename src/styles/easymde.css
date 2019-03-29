@@ -252,7 +252,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 
 .CodeMirror-scroll {
-	overflow: scroll!important;
+	overflow: hidden;
 	margin-bottom: -30px;
 	margin-right: -30px;
 	padding-bottom: 30px;

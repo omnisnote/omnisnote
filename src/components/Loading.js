@@ -37,9 +37,9 @@ export default function Loading(props) {
       width: "100%",
       zIndex: 100000000,
     })}>
-      <Bar opacity="0.4" delay="0.5s" time="2s"/>
-      <Bar opacity="0.4" delay="1s"   time="1s"/>
-      <Bar opacity="0.4" delay="1.5s" time="1.5s"/>
+      <Bar opacity="0.7" delay="0.5s" time="2s"/>
+      <Bar opacity="0.7" delay="1s"   time="1s"/>
+      <Bar opacity="0.7" delay="1.5s" time="1.5s"/>
     </div>
   )
 }

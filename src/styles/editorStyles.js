@@ -11,7 +11,6 @@ export default (theme, userSettings) => ({
     position: "fixed",
     bottom: "12px",
     right: "12px",
-    opacity: 0.6,
     zIndex: 12,
     color: theme.color,
     backgroundColor: theme.background,

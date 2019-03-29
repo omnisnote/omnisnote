@@ -12,7 +12,6 @@ const NavLink = props => (
     position: "relative",
     cursor: "pointer",
     ":hover": {
-      color: "#000",
       ":after": {
         opacity: 1,
         bottom: 0
@@ -28,7 +27,7 @@ const NavLink = props => (
       opacity: 0,
       transition: theme.transition("0.1s"),
       left: 0,
-      backgroundColor: "#000"
+      backgroundColor: theme.textColor
     }
   }) }>
     <Link to={ props.href }>{ props.children }</Link>
