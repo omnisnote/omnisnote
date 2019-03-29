@@ -19,5 +19,8 @@ export default (theme, userSettings) => ({
   },
   ".CodeMirror-cursor, .CodeMirror div.CodeMirror-secondarycursor": {
     borderLeft: "1.5px solid " + theme.main + " !important",
+  },
+  ".CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler": {
+    backgroundColor: theme.background,
   }
 })

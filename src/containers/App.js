@@ -26,7 +26,7 @@ class App extends Component {
     this.state = {
       authed: auth.currentUser || false,
       userData: auth.currentUser || {},
-      userSettings: { theme: "light" },
+      userSettings: { theme: "dark" },
       onAuth: (user => {
         if(!user) return
         createUser(user)
@@ -53,6 +53,7 @@ class App extends Component {
                   <Global styles={ theme => ({
                     body: {
                       backgroundColor: theme.body,
+                      color: theme.textColor,
                       marginTop: theme.headerHeight,
                     },
                   })} />

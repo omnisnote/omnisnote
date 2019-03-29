@@ -37,14 +37,14 @@ export default class Notes extends Component {
   render() { return ( <>
     <Header />
     <div className="notes" css={ theme => ({
-      margin: "32px auto 12px",
+      margin: "72px auto 16px",
       width: "95%",
       maxWidth: theme.maxWidth
     })}>
       <h1 css={{
         fontSize: "42px",
         fontWeight: 300,
-        margin: "8px 0"
+        margin: "8px 0 16px"
       }}>Notes</h1>
       { this.state.notes ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
@@ -52,7 +52,7 @@ export default class Notes extends Component {
             backgroundColor: theme.background,
             padding: "8px",
             borderRadius: "2px",
-            marginBottom: "4px",
+            marginBottom: "8px",
             cursor: "pointer",
             borderLeft: "4px transparent solid",
             transition: theme.transition("0.1s"),

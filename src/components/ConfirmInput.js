@@ -12,7 +12,7 @@ export default function ConfirmInput(props) {
       marginBottom: "16px",
       ...props.style
     }) }>
-      <input type="text" 
+      <input type="text" placeholder={ props.placeholder }
         defaultValue={ props.defaultValue } 
         css={ theme => ({
           flex: 1,
@@ -20,7 +20,9 @@ export default function ConfirmInput(props) {
           outline: "none",
           boxShadow: "0 8px 8px -6px rgba(0,0,0,0.1)",
           padding: "8px 16px",
-        }) } onBlur={ e => props.confirm(e) }/>
+          color: theme.textColor,
+          backgroundColor: theme.background,
+        }) } onBlur={ e => props.confirm && props.confirm(e) }/>
     </div>
   )
 }

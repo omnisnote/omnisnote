@@ -24,11 +24,6 @@
 	padding: 0 4px
 }
 
-.CodeMirror-gutter-filler,
-.CodeMirror-scrollbar-filler {
-	background-color: #fff
-}
-
 .CodeMirror-gutters {
 	border-right: 1px solid #ddd;
 	background-color: #f7f7f7;

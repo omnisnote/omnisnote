@@ -37,7 +37,8 @@ export default class Note extends Component {
           parsingConfig: {
             allowAtxHeaderWithoutSpace: true,
             strikethrough: true,
-          }, 
+          },
+          spellChecker: false,
         })
       })
     })
@@ -74,7 +75,7 @@ export default class Note extends Component {
           <ConfirmInput defaultValue={ this.state.title } style={{
             maxWidth: "64px",
             input: { fontSize: "24px" }
-          }} />
+          }} placeholder="title" />
         </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>
