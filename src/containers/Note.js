@@ -62,6 +62,10 @@ export default class Note extends Component {
     })
   }
   
+  rename(e) {
+    this.setState({ title: e.target.value })
+  }
+
   render() { return (
     <div className="note">
       <Header />
@@ -75,7 +79,7 @@ export default class Note extends Component {
           <ConfirmInput defaultValue={ this.state.title } style={{
             maxWidth: "64px",
             input: { fontSize: "24px" }
-          }} placeholder="title" />
+          }} placeholder="title" onConfirm={ this.rename.bind(this) } />
         </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>
