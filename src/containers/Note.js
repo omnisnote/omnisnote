@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import { css, jsx, Global } from '@emotion/core'
 
+import { Helmet } from "react-helmet"
+
 import EasyMDE from "easymde"
 
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
@@ -76,6 +78,9 @@ export default class Note extends Component {
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
+          <Helmet>
+            <title>Omnisnote - { this.state.title }</title>
+          </Helmet>
           <ConfirmInput defaultValue={ this.state.title } style={{
             maxWidth: "64px",
             input: { fontSize: "24px" }
