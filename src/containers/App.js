@@ -15,8 +15,6 @@ import themes from "../styles/themes.js"
 
 import Header from "../components/Header.js"
 
-window.themes = themes
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -55,6 +53,16 @@ class App extends Component {
                       backgroundColor: theme.body,
                       color: theme.textColor,
                       marginTop: theme.headerHeight,
+                    },
+                    "::-webkit-scrollbar": {
+                      width: "6px",
+                      background: "transparent"
+                    },
+                    "::-webkit-scrollbar-thumb": {
+                      backgroundColor: theme.main
+                    },
+                    "::selection": {
+                      backgroundColor: theme.selection
                     },
                   })} />
                   <Switch>
