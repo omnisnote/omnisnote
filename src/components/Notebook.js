@@ -3,10 +3,9 @@ import { css, jsx } from '@emotion/core'
 import { Link } from "react-router-dom"
 
 export default function Notebook(props) {
-  return (
+  return ( <div css={ theme => ({ margin: "8px", maxWidth: "200px", }) }>
     <Link to={ props.uid + "/notes/"}>
       <div className="notebook-card" css={ theme => ({
-        maxWidth: "200px",
         backgroundColor: props.color ?
                           props.color === "__DEFAULT__" 
                             ? theme.background 
@@ -18,5 +17,5 @@ export default function Notebook(props) {
         <p>{ props.title }</p>
       </div>
     </Link>
-  )
+  </div> )
 }

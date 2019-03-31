@@ -1,6 +1,7 @@
+/** @jsx jsx */
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
-import { Global, css } from '@emotion/core'
+import { Global, css, jsx } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
 import auth from "../firebase/auth.js"
@@ -25,7 +26,7 @@ class App extends Component {
     this.state = {
       authed: auth.currentUser || false,
       userData: auth.currentUser || {},
-      userSettings: { theme: "light" },
+      userSettings: { theme: "light" }, //TODO: cookies
       onAuth: (user => {
         if(!user) return
         createUser(user)
@@ -37,12 +38,12 @@ class App extends Component {
             userSettings: res.data().settings
           })
         })
-      }).bind(this)
+      }).bind(this),
     }
   }
 
   render() { return (
-    <div className="app">
+    <div className="app" css={{ paddingTop: "12px" }}>
       <UserContext.Provider value={ this.state }>
           <Router>
             <>

@@ -16,7 +16,6 @@ let authListener = auth.onAuthStateChanged(e => {
     ), document.getElementById('root'))
 })
 
-//TODO: make loading thing
 ReactDOM.render((
     <Loading />
 ), document.getElementById('root'))

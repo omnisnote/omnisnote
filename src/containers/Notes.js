@@ -41,7 +41,7 @@ export default class Notes extends Component {
   render() { return ( <>
     <Header />
     <div className="notes" css={ theme => ({
-      margin: "72px auto 16px",
+      margin: "14px auto 0",
       width: "95%",
       maxWidth: theme.maxWidth
     })}>

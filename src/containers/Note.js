@@ -73,7 +73,7 @@ export default class Note extends Component {
       <Header />
       <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
       <div css={ theme => ({
-        margin: "84px auto 12px",
+        margin: "0 auto",
         width: "95%",
         maxWidth: theme.maxWidth
       })}>
