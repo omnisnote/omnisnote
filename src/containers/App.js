@@ -9,6 +9,7 @@ import { createUser, getUser } from "../firebase/firestore.js"
 import Auth from "./Auth.js"
 import Notes from "./Notes.js"
 import Note from "./Note.js"
+import Notebooks from "./Notebooks.js"
 
 import UserContext from "../UserContext.js"
 import themes from "../styles/themes.js"
@@ -24,7 +25,7 @@ class App extends Component {
     this.state = {
       authed: auth.currentUser || false,
       userData: auth.currentUser || {},
-      userSettings: { theme: "dark" },
+      userSettings: { theme: "light" },
       onAuth: (user => {
         if(!user) return
         createUser(user)
@@ -71,7 +72,8 @@ class App extends Component {
                       <button onClick={ e => auth.signOut() }>signOut</button>
                     </>) }/>
                     <Route exact path="/notes" component={ Notes }/>
-                    <Route exact path="/:notebook/notes" component={ Notes }/>
+                    <Route exact path="/notebooks" component={ Notebooks }/>
+                    <Route exact path="/notebooks/:notebook/notes" component={ Notes }/>
                     <Route exact path="/note/:uid" component={ Note }/>
                     <Redirect to="/notes"/>
                   </Switch>

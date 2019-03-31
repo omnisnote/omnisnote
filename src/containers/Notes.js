@@ -8,7 +8,7 @@ import Loading from "../components/Loading.js"
 
 import MaterialIcon from "material-icons-react"
 
-import { getNoteList, createTxtNote } from "../firebase/firestore.js"
+import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
 
 const P = props => (
   <span css={ theme => ({ 
@@ -22,11 +22,15 @@ const P = props => (
 export default class Notes extends Component {
   constructor(props) {
     super(props)
+    const notebook = props.match.params.notebook || "__NONE__"
     this.state = {
-      notebook: props.match.params.notebook || "__NONE__",
+      notebook,
       notes: null
     }
-    getNoteList().then(res => this.setState({ notes: res }))
+    getNoteList(notebook).then(res => this.setState({ notes: res }))
+    if(props.match.params.notebook) {
+      getNotebook(notebook).then(res => this.setState({ notebookData: res }))
+    }
   }
 
   createNote() {
@@ -45,19 +49,19 @@ export default class Notes extends Component {
         fontSize: "42px",
         fontWeight: 300,
         margin: "8px 0 16px"
-      }}>Notes</h1>
+      }}>Notes { this.state.notebookData ? (" - " + this.state.notebookData.title) : "" }</h1>
       { this.state.notes ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({
             backgroundColor: theme.background,
             padding: "8px",
-            borderRadius: "2px",
             marginBottom: "8px",
             cursor: "pointer",
             borderLeft: "4px transparent solid",
-            transition: theme.transition("0.1s"),
+            boxShadow: "0 2px 6px -4px rgba(0,0,0,0.2)",
+            transition: theme.transition("0.2s"),
             ":hover": {
-              boxShadow: "0 6px 12px -4px rgba(0,0,0,0.2)",
+              boxShadow: "0 4px 8px -4px rgba(0,0,0,0.2)",
               borderLeft: `4px ${ theme.main } solid`
             }
           })}>

@@ -17,8 +17,9 @@ function createUser(user) {
           email: user.email // strictly for identification in the db, should not be used in the app
         }
       })
-      createTxtNote("Welcome to Omnisnote!", "TODO: write this")
-    }    
+      createTxtNote("Welcome to Omnisnote!", "__NONE__", "TODO: write this")
+      createNotebook("Welcome to Omnisnote!")
+    }
   })
 }
 
@@ -35,8 +36,6 @@ function createTxtNote(title = "new note", notebook = "__NONE__", content = "") 
   return uid
 }
 
-window.createTxtNote = createTxtNote
-
 function getTxtNote(uid) {
   return new Promise((resolve, reject) => {
     getUser().collection("text-notes-meta").doc(uid).get().then(meta => {
@@ -52,7 +51,6 @@ function getTxtNote(uid) {
 }
 
 function setTxtNote(uid, data) {
-  console.log(data)
   getUser().collection("text-notes-meta").doc(uid).set({
     title: data.title,
     tags: data.tags,
@@ -72,5 +70,45 @@ function getNoteList(notebook = "__NONE__") { //TODO: error handling
   })
 }
 
+function getNotebooks() {
+  return new Promise((resolve, reject) => {
+    getUser().collection("notebooks").get().then(res => {
+      resolve(res.docs.map(d => ({ ...d.data(), uid: d.id })))
+    })
+  })
+}
+
+function getNotebook(uid) {
+  return new Promise((resolve, reject) => {
+    getUser().collection("notebooks").doc(uid).get().then(res => {
+      resolve({ ...res.data(), id: res.id })
+    })
+  })
+}
+
+window.getNotebook = getNotebook
+
+function createNotebook(title = "new notebook") {
+  // created seperately in order to return the uid
+  const uid = getUser().collection("notebooks").doc().id
+  getUser().collection("notebooks").doc(uid).set({ 
+    title,
+    color: "#fff"
+  })
+  return uid
+}
+
+window.createNotebook = createNotebook
+
 export default firestore
-export { getUser, createUser, createTxtNote, getTxtNote, getNoteList, setTxtNote }
+export { 
+  getUser, 
+  createUser, 
+  createTxtNote, 
+  getTxtNote, 
+  getNoteList, 
+  setTxtNote,
+  getNotebooks,
+  createNotebook,
+  getNotebook
+}
