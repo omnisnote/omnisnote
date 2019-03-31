@@ -39,7 +39,7 @@ export default class Notes extends Component {
   }
 
   render() { return ( <>
-    <Header />
+    <Header active="notes" />
     <div className="notes" css={ theme => ({
       margin: "14px auto 0",
       width: "95%",
@@ -49,7 +49,7 @@ export default class Notes extends Component {
         fontSize: "42px",
         fontWeight: 300,
         margin: "8px 0 16px"
-      }}>Notes { this.state.notebookData ? (" - " + this.state.notebookData.title) : "" }</h1>
+      }}>{ this.state.notebookData ? ("Notebook - " + this.state.notebookData.title) : "Notes" }</h1>
       { this.state.notes ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({

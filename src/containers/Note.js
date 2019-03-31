@@ -70,7 +70,7 @@ export default class Note extends Component {
 
   render() { return (
     <div className="note">
-      <Header />
+      <Header active="note"/>
       <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
       <div css={ theme => ({
         margin: "0 auto",

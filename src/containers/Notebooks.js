@@ -24,7 +24,7 @@ export default class Notebooks extends Component {
   }
 
   render() { return ( <>
-    <Header />
+    <Header active="notebooks"/>
     { this.state.notebooks ? <>{
       this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
     }</> : <Loading /> }
