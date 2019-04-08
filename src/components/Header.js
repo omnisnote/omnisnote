@@ -21,6 +21,15 @@ const NavLink = props => (
       ":hover": {
         backgroundColor: "rgba(0, 0, 0, 0.05)",
         borderBottom: ("2px solid " + theme.main)
+      },
+      [theme.mobileBreakpoint]: {
+        display: "block",
+        height: "initial",
+        margin: "8px 0",
+        padding: "8px",
+        backgroundColor: props.active ? "rgba(0, 0, 0, 0.05)" : "transparent",
+        borderBottom: "2px transparent solid",
+        ":hover": { borderBottom: "2px transparent solid" }
       }
     }) }>
       { props.children }
@@ -60,10 +69,34 @@ export default function Header(props) {
             justifyContent: "center",
             marginLeft: "0px",
             [theme.mobileBreakpoint]: {
-              display: "none"
-            }
+              "::after": {
+                content: "''",
+                position: "fixed",
+                display: "block",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                zIndex: -1
+              }
+            },
           }) }>
-            <ul css={ theme => ({ listStyle: "none", height: "100%" })}>
+            <ul css={ theme => ({ 
+              listStyle: "none", 
+              height: "100%",
+              [theme.mobileBreakpoint]: {
+                position: "fixed",
+                top: "0px",
+                left: "0px",
+                height: "100vh",
+                width: "300px",  
+                boxShadow: "4px 4px 8px -4px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "#fff",
+                zIndex: 1,
+
+              },
+            })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>
               <NavLink active={props.active === "templates"} href="/templates/">Templates</NavLink>
               <NavLink active={props.active === "notebooks"} href="/notebooks/">Notebooks</NavLink>

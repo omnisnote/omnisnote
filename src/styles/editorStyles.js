@@ -5,7 +5,7 @@ export default (theme, userSettings) => ({
   ".CodeMirror": {
     backgroundColor: theme.background,
     boxShadow: "0 8px 8px -6px rgba(0,0,0,0.2)",
-    margin: "0 auto 40vh",
+    margin: "0 auto 0",
   },
   ".editor-statusbar": {
     position: "fixed",
