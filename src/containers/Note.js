@@ -73,7 +73,7 @@ export default class Note extends Component {
       <Header active="note"/>
       <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
       <div css={ theme => ({
-        margin: "0 auto",
+        margin: "4px auto 0",
         width: "95%",
         maxWidth: theme.maxWidth,
         [theme.mobileBreakpoint]: {
