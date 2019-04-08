@@ -75,16 +75,24 @@ export default class Note extends Component {
       <div css={ theme => ({
         margin: "0 auto",
         width: "95%",
-        maxWidth: theme.maxWidth
+        maxWidth: theme.maxWidth,
+        [theme.mobileBreakpoint]: {
+          width: "100%",
+          margin: 0
+        }
       })}>
         { this.state.note ? ( <>
           <Helmet>
             <title>Omnisnote - { this.state.title }</title>
           </Helmet>
-          <ConfirmInput defaultValue={ this.state.title } style={{
-            maxWidth: "64px",
-            input: { fontSize: "24px" }
-          }} placeholder="title" onConfirm={ this.rename.bind(this) } />
+          <ConfirmInput defaultValue={ this.state.title } style={theme => ({
+            maxWidth: "480px",
+            input: { fontSize: "24px" },
+            [theme.mobileBreakpoint]: {
+              maxWidth: "100%",
+              margin: "0 0 8px",
+            }    
+          })} placeholder="title" onConfirm={ this.rename.bind(this) } />
         </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>

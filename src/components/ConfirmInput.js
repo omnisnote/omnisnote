@@ -10,7 +10,7 @@ export default function ConfirmInput(props) {
       display: "flex",
       width: "100%",
       marginBottom: "16px",
-      ...props.style
+      ...props.style(theme)
     }) }>
       <input type="text" placeholder={ props.placeholder }
         defaultValue={ props.defaultValue } 

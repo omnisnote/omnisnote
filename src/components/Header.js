@@ -28,7 +28,6 @@ const NavLink = props => (
   </Link>
 )
 
-
 export default function Header(props) {
   return (
     <UserContext.Consumer>{ user => ( 
@@ -60,6 +59,9 @@ export default function Header(props) {
             alignItems: "center",
             justifyContent: "center",
             marginLeft: "0px",
+            [theme.mobileBreakpoint]: {
+              display: "none"
+            }
           }) }>
             <ul css={ theme => ({ listStyle: "none", height: "100%" })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>

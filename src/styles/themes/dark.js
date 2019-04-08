@@ -6,7 +6,8 @@ const dark = {
   selection: "rgba(122, 66, 165, 0.4)",
   headerHeight: "56px",
   maxWidth: "1280px",
-  transition: (t = "0.2s") => t + " ease-in-out all"
+  transition: (t = "0.2s") => t + " ease-in-out all",
+  mobileBreakpoint: "@media (max-width: 480px)"
 }
 
 export default dark
