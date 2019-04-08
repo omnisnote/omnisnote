@@ -22,7 +22,7 @@ export default function ConfirmInput(props) {
           padding: "8px 16px",
           color: theme.textColor,
           backgroundColor: theme.background,
-        }) } onBlur={ e => props.confirm && props.confirm(e) }/>
+        }) } onBlur={ e => props.onConfirm && props.onConfirm(e) }/>
     </div>
   )
 }

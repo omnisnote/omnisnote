@@ -1,6 +1,7 @@
+/** @jsx jsx */
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
-import { Global, css } from '@emotion/core'
+import { Global, css, jsx } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
 import auth from "../firebase/auth.js"
@@ -9,6 +10,7 @@ import { createUser, getUser } from "../firebase/firestore.js"
 import Auth from "./Auth.js"
 import Notes from "./Notes.js"
 import Note from "./Note.js"
+import Notebooks from "./Notebooks.js"
 
 import UserContext from "../UserContext.js"
 import themes from "../styles/themes.js"
@@ -16,8 +18,6 @@ import themes from "../styles/themes.js"
 function getLocalSettings() {
   return JSON.parse(localStorage.getItem("settings"))
 }
-
-window.getLocalSettings = getLocalSettings
 
 class App extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   render() { return (
-    <div className="app">
+    <div className="app" css={{ paddingTop: "12px" }}>
       <UserContext.Provider value={ this.state }>
           <Router>
             <>
@@ -63,6 +63,16 @@ class App extends Component {
                       color: theme.textColor,
                       marginTop: theme.headerHeight,
                     },
+                    "::-webkit-scrollbar": {
+                      width: "6px",
+                      background: "transparent"
+                    },
+                    "::-webkit-scrollbar-thumb": {
+                      backgroundColor: theme.main
+                    },
+                    "::selection": {
+                      backgroundColor: theme.selection
+                    },
                   })} />
                   <Switch>
                     <Route exact path="/" render={ _ => (<>
@@ -70,7 +80,8 @@ class App extends Component {
                       <button onClick={ e => auth.signOut() }>signOut</button>
                     </>) }/>
                     <Route exact path="/notes" component={ Notes }/>
-                    <Route exact path="/:notebook/notes" component={ Notes }/>
+                    <Route exact path="/notebooks" component={ Notebooks }/>
+                    <Route exact path="/notebooks/:notebook/notes" component={ Notes }/>
                     <Route exact path="/note/:uid" component={ Note }/>
                     <Redirect to="/notes"/>
                   </Switch>

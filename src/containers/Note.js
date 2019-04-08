@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import { css, jsx, Global } from '@emotion/core'
 
+import { Helmet } from "react-helmet"
+
 import EasyMDE from "easymde"
 
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
@@ -62,20 +64,27 @@ export default class Note extends Component {
     })
   }
   
+  rename(e) {
+    this.setState({ title: e.target.value })
+  }
+
   render() { return (
     <div className="note">
-      <Header />
+      <Header active="note"/>
       <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
       <div css={ theme => ({
-        margin: "84px auto 12px",
+        margin: "0 auto",
         width: "95%",
         maxWidth: theme.maxWidth
       })}>
         { this.state.note ? ( <>
+          <Helmet>
+            <title>Omnisnote - { this.state.title }</title>
+          </Helmet>
           <ConfirmInput defaultValue={ this.state.title } style={{
             maxWidth: "64px",
             input: { fontSize: "24px" }
-          }} placeholder="title" />
+          }} placeholder="title" onConfirm={ this.rename.bind(this) } />
         </> ) : <Loading /> }
         <textarea ref={ el => this.editor = el }
                   style={{ display: "none" }}></textarea>
