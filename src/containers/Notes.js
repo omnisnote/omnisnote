@@ -25,12 +25,26 @@ export default class Notes extends Component {
     const notebook = props.match.params.notebook || "__NONE__"
     this.state = {
       notebook,
-      notes: null
+      notes: null,
+      notebookData: null,
     }
+
     getNoteList(notebook).then(res => this.setState({ notes: res }))
     if(props.match.params.notebook) {
       getNotebook(notebook).then(res => this.setState({ notebookData: res }))
     }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const notebook = this.props.match.params.notebook || "__NONE__"
+    if(notebook === prevState.notebook) return
+
+    if(this.props.match.params.notebook) {
+      getNotebook(notebook).then(res => this.setState({ notebookData: res }))
+    } else if(this.state.notebookData) {
+      this.setState({ notebookData: null })
+    }
+    getNoteList(notebook).then(res => this.setState({ notes: res }))
   }
 
   createNote() {
