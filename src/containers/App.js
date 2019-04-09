@@ -19,7 +19,9 @@ function getLocalSettings() {
   return JSON.parse(localStorage.getItem("settings"))
 }
 
-class App extends Component {
+console.log(themes)
+
+export default class App extends Component {
   constructor(props) {
     super(props)
 
@@ -45,8 +47,6 @@ class App extends Component {
         localStorage.setItem("settings", JSON.stringify(this.state.userSettings))
       }
     }
-    
-    window.state = this.state
   }
 
   render() { return (
@@ -102,5 +102,3 @@ class App extends Component {
     </div>
   )}
 }
-
-export default App

@@ -37,7 +37,6 @@ const NavLink = props => (
   </Link>
 )
 
-
 export default function Header(props) {
   return (
     <UserContext.Consumer>{ user => ( 
@@ -100,6 +99,19 @@ export default function Header(props) {
             alignItems: "center",
             justifyContent: "center",
             marginLeft: "0px",
+            [theme.mobileBreakpoint]: {
+              "::after": {
+                content: "''",
+                position: "fixed",
+                display: "block",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                zIndex: -1
+              }
+            },
           }) }>
             <ul css={ theme => ({ 
               listStyle: "none", 
