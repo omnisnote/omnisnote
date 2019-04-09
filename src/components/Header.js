@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React, { useState } from "react"
 import { css, jsx } from '@emotion/core'
 import { Link } from "react-router-dom"
 
@@ -38,6 +39,8 @@ const NavLink = props => (
 )
 
 export default function Header(props) {
+  const [showNav, toggleNav] = useState(false)
+
   return (
     <UserContext.Consumer>{ user => ( 
       <header css={ theme => ({
@@ -61,7 +64,7 @@ export default function Header(props) {
           width: "95%",
           maxWidth: theme.maxWidth
         })}>
-          <nav css={ theme => ({
+          <nav className={ showNav ? "active" : "" } css={ theme => ({
             float: "left",
             height: theme.headerHeight,
             display: "flex",
@@ -69,8 +72,7 @@ export default function Header(props) {
             justifyContent: "center",
             marginLeft: "0px",
             [theme.mobileBreakpoint]: {
-              "::after": {
-                content: "''",
+              ".overlay": {
                 position: "fixed",
                 display: "block",
                 top: "0",
@@ -78,7 +80,19 @@ export default function Header(props) {
                 width: "100%",
                 height: "100vh",
                 backgroundColor: "rgba(0, 0, 0, 0.2)",
-                zIndex: -1
+                opacity: 0,
+                transition: theme.transition("0.3s"),
+                zIndex: -1,
+                pointerEvents: "none"
+              },
+              "&.active": {
+                ".overlay": {
+                  opacity: 1,
+                  pointerEvents: "auto"
+                },
+                ul: {
+                  left: "0px",
+                }
               }
             },
           }) }>
@@ -88,13 +102,14 @@ export default function Header(props) {
               [theme.mobileBreakpoint]: {
                 position: "fixed",
                 top: "0px",
-                left: "0px",
+                left: "-320px",
                 height: "100vh",
                 width: "300px",  
+                maxWidth: "90%",
                 boxShadow: "4px 4px 8px -4px rgba(0, 0, 0, 0.2)",
                 backgroundColor: "#fff",
                 zIndex: 1,
-
+                transition: theme.transition("0.12s")
               },
             })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>
@@ -102,6 +117,7 @@ export default function Header(props) {
               <NavLink active={props.active === "notebooks"} href="/notebooks/">Notebooks</NavLink>
               <NavLink active={props.active === "tags"} href="/tags/">Tags</NavLink>
             </ul>
+            <div className="overlay" onClick={ e => toggleNav(false) }></div>
           </nav>
         </div>
         <Link to="/user">
@@ -110,6 +126,28 @@ export default function Header(props) {
             width: theme.headerHeight,
           })} src={ user.userData.photoURL || "" } />
         </Link>
+        <div onClick={ e => toggleNav(!showNav) } css={ theme => ({
+          height: theme.headerHeight,
+          width: theme.headerHeight,
+          position: "relative",
+          left: "8px",
+          display: "none",
+          cursor: "pointer",
+          [theme.mobileBreakpoint]: {
+            display: "block"
+          },
+          "span": {
+            width: "60%",
+            height: "2px",
+            backgroundColor: theme.main,
+            display: "block",
+            left: "20%",
+            position: "absolute"
+          }
+        }) }>
+          <span css={{ top: "calc(50% - 8px)" }}></span>
+          <span css={{ bottom: "calc(50% - 8px)" }}></span>
+        </div>
       </header>
     )}</UserContext.Consumer>
   )
