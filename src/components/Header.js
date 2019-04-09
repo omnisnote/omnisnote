@@ -17,10 +17,19 @@ const NavLink = props => (
       display: "inline-flex",
       alignItems: "center",
       transition: theme.transition(),
-      borderBottom: props.active ? ("2px solid " + theme.main) : "2px solid transparent",
+      backgroundColor: props.active ? ("rgba(0, 0, 0, 0.05)") : "transparent",
       ":hover": {
         backgroundColor: "rgba(0, 0, 0, 0.05)",
         borderBottom: ("2px solid " + theme.main)
+      },
+      [theme.mobileBreakpoint]: {
+        width: "100%",
+        display: "block",
+        height: "initial",
+        margin: "4px 0",
+        padding: "8px 16px",
+        border: "2px transparent solid",
+        ":hover": { border: "2px transparent solid", }
       }
     }) }>
       { props.children }
@@ -46,6 +55,37 @@ export default function Header(props) {
         },
         ">a": {
           float: "right"
+        },
+        [theme.mobileBreakpoint]: {
+          "nav": {
+            position: "fixed",
+            backgroundColor: "#fff",
+            boxShadow: "4px 4px 8px -4px rgba(0, 0, 0, 0.2)",
+            top: 0,
+            left: "-350px",
+            height: "100vh",
+            width: "90%",
+            maxWidth: "300px",
+            "::after": {
+              content: "''",
+              position: "fixed",
+              top: 0,
+              left: 0,
+              height: "100vh",
+              width: "100%",
+              zIndex: -1,
+              pointerEvents: "none",
+              backgroundColor: "transparent"
+            },
+            "&.active": {
+              left: 0,
+              "::after": {
+                top: 0,
+                pointerEvents: "auto",
+                backgroundColor: "rgba(0, 0, 0, 0.2)"
+              }
+            }
+          },
         }
       }) }>
         <div css={ theme => ({
@@ -61,7 +101,20 @@ export default function Header(props) {
             justifyContent: "center",
             marginLeft: "0px",
           }) }>
-            <ul css={ theme => ({ listStyle: "none", height: "100%" })}>
+            <ul css={ theme => ({ 
+              listStyle: "none", 
+              height: "100%", 
+              [theme.mobileBreakpoint]: {
+                position: "fixed",
+                backgroundColor: "#fff",
+                boxShadow: "4px 4px 8px -4px rgba(0, 0, 0, 0.2)",
+                top: 0,
+                left: 0,
+                height: "100vh",
+                width: "90%",
+                maxWidth: "300px",
+              }
+            })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>
               <NavLink active={props.active === "templates"} href="/templates/">Templates</NavLink>
               <NavLink active={props.active === "notebooks"} href="/notebooks/">Notebooks</NavLink>

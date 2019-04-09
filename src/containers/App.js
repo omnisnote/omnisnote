@@ -75,10 +75,6 @@ class App extends Component {
                     },
                   })} />
                   <Switch>
-                    <Route exact path="/" render={ _ => (<>
-                      <h1>home - authed</h1> 
-                      <button onClick={ e => auth.signOut() }>signOut</button>
-                    </>) }/>
                     <Route exact path="/notes" component={ Notes }/>
                     <Route exact path="/notebooks" component={ Notebooks }/>
                     <Route exact path="/notebooks/:notebook/notes" component={ Notes }/>
