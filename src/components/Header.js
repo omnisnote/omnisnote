@@ -68,25 +68,6 @@ export default function Header(props) {
             height: "100vh",
             width: "90%",
             maxWidth: "300px",
-            "::after": {
-              content: "''",
-              position: "fixed",
-              top: 0,
-              left: 0,
-              height: "100vh",
-              width: "100%",
-              zIndex: -1,
-              pointerEvents: "none",
-              backgroundColor: "transparent"
-            },
-            "&.active": {
-              left: 0,
-              "::after": {
-                top: 0,
-                pointerEvents: "auto",
-                backgroundColor: "rgba(0, 0, 0, 0.2)"
-              }
-            }
           },
         }
       }) }>
@@ -112,10 +93,9 @@ export default function Header(props) {
                 height: "100vh",
                 backgroundColor: "rgba(0, 0, 0, 0.2)",
                 opacity: 0,
-                transition: theme.transition("0.3s"),
-                zIndex: -1,
-                pointerEvents: "none"
-              },
+                pointerEvents: "none",
+                transition: theme.transition("0.2s"),
+             },
               "&.active": {
                 ".overlay": {
                   opacity: 1,
@@ -129,7 +109,7 @@ export default function Header(props) {
           }) }>
             <ul css={ theme => ({ 
               listStyle: "none", 
-              height: "100%", 
+              height: "100%",
               [theme.mobileBreakpoint]: {
                 position: "fixed",
                 top: "0px",
@@ -139,8 +119,8 @@ export default function Header(props) {
                 maxWidth: "90%",
                 boxShadow: "4px 4px 8px -4px rgba(0, 0, 0, 0.2)",
                 backgroundColor: "#fff",
-                zIndex: 1,
-                transition: theme.transition("0.12s")
+                zIndex: 4,
+                transition: theme.transition("0.2s")
               },
             })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>
@@ -164,6 +144,7 @@ export default function Header(props) {
           left: "8px",
           display: "none",
           cursor: "pointer",
+          zIndex: -1,
           [theme.mobileBreakpoint]: {
             display: "block"
           },
