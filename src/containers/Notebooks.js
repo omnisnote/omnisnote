@@ -25,8 +25,14 @@ export default class Notebooks extends Component {
 
   render() { return ( <>
     <Header active="notebooks"/>
-    { this.state.notebooks ? <>{
-      this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
-    }</> : <Loading /> }
+    <div css={ theme => ({
+      margin: "4px auto 0",
+      width: "95%",
+      maxWidth: theme.maxWidth,
+    })}>
+      { this.state.notebooks ? <>{
+        this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
+      }</> : <Loading /> }
+    </div>
   </> )}
 }

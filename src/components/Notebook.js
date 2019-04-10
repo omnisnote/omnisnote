@@ -12,7 +12,11 @@ export default function Notebook(props) {
                             : props.color 
                         : theme.background,
         boxShadow: "0 4px 12px -8px rgba(0,0,0,0.2)",
-        padding: "8px"
+        padding: "8px",
+        transition: theme.transition("0.3s"),
+        ":hover": {
+          boxShadow: "0 4px 16px -4px rgba(0,0,0,0.2)",
+        }
       })}>
         <p>{ props.title }</p>
       </div>
