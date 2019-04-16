@@ -11,7 +11,7 @@ export default class Auth extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      googleProvider: new firebase.auth.GoogleAuthProvider()
+
     }
   }
 
@@ -31,6 +31,10 @@ export default class Auth extends Component {
             }
           })}>
             <h1>Hello { userData.displayName.split(" ")[0] }</h1>
+            <button onClick={ e => {
+              auth.signOut()
+              window.location.reload()
+            } }>Log out</button>
           </div>
       </>) }
     </UserContext.Consumer>

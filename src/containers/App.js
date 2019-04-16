@@ -97,7 +97,7 @@ export default class App extends Component {
     
                   <Redirect from="/signup" to="/auth"/>
                   <Redirect from="/login" to="/auth"/>
-                  <Redirect to="/"/>
+                  <Redirect to="/auth"/>
                 </Switch>
               </>) }
             </>

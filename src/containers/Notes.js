@@ -9,6 +9,7 @@ import Loading from "../components/Loading.js"
 import MaterialIcon from "material-icons-react"
 
 import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
+import auth from '../firebase/auth.js'
 
 const P = props => (
   <span css={ theme => ({ 
@@ -28,6 +29,8 @@ export default class Notes extends Component {
       notes: null,
       notebookData: null,
     }
+
+    console.log(auth)
 
     getNoteList(notebook).then(res => this.setState({ notes: res }))
     if(props.match.params.notebook) {
