@@ -18,7 +18,6 @@ function createUser(user) {
         }
       })
       createTxtNote("Welcome to Omnisnote!", "__NONE__", "TODO: write this")
-      createNotebook("Welcome to Omnisnote!")
     }
   })
 }

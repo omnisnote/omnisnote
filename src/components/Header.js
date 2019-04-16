@@ -18,6 +18,7 @@ const NavLink = props => (
       cursor: "pointer",
       display: "inline-flex",
       alignItems: "center",
+      borderBottom: "2px solid transparent",
       transition: theme.transition(),
       backgroundColor: props.active ? ("rgba(0, 0, 0, 0.05)") : "transparent",
       ":hover": {
