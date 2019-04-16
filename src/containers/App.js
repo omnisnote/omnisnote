@@ -11,6 +11,7 @@ import Auth from "./Auth.js"
 import Notes from "./Notes.js"
 import Note from "./Note.js"
 import Notebooks from "./Notebooks.js"
+import User from "./User.js"
 
 import UserContext from "../UserContext.js"
 import themes from "../styles/themes.js"
@@ -77,8 +78,11 @@ export default class App extends Component {
                   <Switch>
                     <Route exact path="/notes" component={ Notes }/>
                     <Route exact path="/notebooks" component={ Notebooks }/>
+                    <Route exact path="/user" component={ User }/>
                     <Route exact path="/notebooks/:notebook/notes" component={ Notes }/>
                     <Route exact path="/note/:uid" component={ Note }/>
+                    
+                    <Redirect from="/settings" to="/user"/>
                     <Redirect to="/notes"/>
                   </Switch>
                 </ThemeProvider>
