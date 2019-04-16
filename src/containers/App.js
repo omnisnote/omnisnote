@@ -51,30 +51,36 @@ export default class App extends Component {
   }
 
   render() { return (
-    <div className="app" css={{ paddingTop: "12px" }}>
+    <div className="app">
       <UserContext.Provider value={ this.state }>
           <Router>
-            <>
+            <ThemeProvider theme={ themes[this.state.userSettings.theme] }>
+              {/* authed */}
+              <Global styles={ theme => ({
+                body: {
+                  backgroundColor: theme.body,
+                  color: theme.textColor,
+                },
+                "::-webkit-scrollbar": {
+                  width: "6px",
+                  background: "transparent"
+                },
+                "::-webkit-scrollbar-thumb": {
+                  backgroundColor: theme.main
+                },
+                "::selection": {
+                  backgroundColor: theme.selection
+                },
+              })} />
               { this.state.authed ? (<>
-                <ThemeProvider theme={ themes[this.state.userSettings.theme] }>
-                  {/* authed */}
                   <Global styles={ theme => ({
                     body: {
-                      backgroundColor: theme.body,
-                      color: theme.textColor,
                       marginTop: theme.headerHeight,
                     },
-                    "::-webkit-scrollbar": {
-                      width: "6px",
-                      background: "transparent"
-                    },
-                    "::-webkit-scrollbar-thumb": {
-                      backgroundColor: theme.main
-                    },
-                    "::selection": {
-                      backgroundColor: theme.selection
-                    },
-                  })} />
+                    ".app": {
+                      paddingTop: "12px"
+                    }
+                  }) }/>
                   <Switch>
                     <Route exact path="/notes" component={ Notes }/>
                     <Route exact path="/notebooks" component={ Notebooks }/>
@@ -85,14 +91,9 @@ export default class App extends Component {
                     <Redirect from="/settings" to="/user"/>
                     <Redirect to="/notes"/>
                   </Switch>
-                </ThemeProvider>
               </>) : (<>
                 {/* unauthed */}
                 <Switch>
-                  <Route exact path="/" render={ _ => (<>
-                    <h1>home - unauthed</h1>
-                    <Link to="/auth">auth</Link>
-                  </>) }/>
                   <Route exact path="/auth" component={ Auth }/>
     
                   <Redirect from="/signup" to="/auth"/>
@@ -100,7 +101,7 @@ export default class App extends Component {
                   <Redirect to="/auth"/>
                 </Switch>
               </>) }
-            </>
+            </ThemeProvider>
           </Router>
       </UserContext.Provider>
     </div>
