@@ -6,6 +6,7 @@ import { auth, firebase } from "../firebase"
 
 import UserContext from "../UserContext"
 
+window.auth = auth
 
 export default class Auth extends Component {
   constructor(props) {
@@ -73,12 +74,15 @@ export default class Auth extends Component {
             }
           }) }>
             <h3 css={ theme => ({ marginBottom: "16px" }) }>Login or Signup</h3>
-            <input placeholder="email" type="text"/>
-            <input placeholder="password" type="password"/>
+            <input ref={ el => this.emailIn = el } placeholder="email" type="text"/>
+            <input ref={ el => this.passwordIn = el } placeholder="password" type="password"/>
             <button css={{ marginBottom: "0 !important" }} onClick={ 
-              e => auth.signInWithPopup(this.state.googleProvider).then(res => {
-                this.props.history.push("/")
-              }).catch(console.log) } //TODO: handle this properly
+              e => {
+                auth.signInWithEmailAndPassword(this.emailIn.value, this.passwordIn.value)
+                  .then(res => this.props.history.push("/"))
+                  .catch(res => auth.createUserWithEmailAndPassword(this.emailIn.value, this.passwordIn.value)
+                    .then( res => this.props.history.push("/")).catch(console.log))
+              } } //TODO: handle this properly
             >Login</button>
             <p css={ theme => ({
               textAlign: "center",

@@ -30,7 +30,7 @@ export default class Auth extends Component {
               margin: 0
             }
           })}>
-            <h1>Hello { userData.displayName.split(" ")[0] }</h1>
+            <h1>Hello { userData.displayName ? userData.displayName.split(" ")[0] : ""}</h1>
             <button onClick={ e => {
               auth.signOut()
               window.location.reload()
