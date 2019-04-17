@@ -7,6 +7,15 @@ export default (theme, userSettings) => ({
     boxShadow: "0 8px 8px -6px rgba(0,0,0,0.2)",
     margin: "0 auto 0",
   },
+  ".CodeMirror-line::selection, .CodeMirror-line>span::selection, .CodeMirror-line>span>span::selection": {
+    backgroundColor: theme.selection + " !important"
+  },
+  ".CodeMirror-line::-moz-selection, .CodeMirror-line>span::-moz-selection, .CodeMirror-line>span>span::-moz-selection": {
+    backgroundColor: theme.selection + " !important"
+  },
+  ".CodeMirror-selected": {
+    backgroundColor: theme.selection + " !important"
+  },
   ".editor-statusbar": {
     position: "fixed",
     bottom: "12px",

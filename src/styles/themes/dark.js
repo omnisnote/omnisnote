@@ -5,7 +5,7 @@ const dark = {
   background: "#000000",
   main: "#FF6D6B",
   altMain: "#7B8CDE",
-  selection: "rgba(122, 66, 165, 0.4)",
+  selection: "rgba(255, 255, 255, 0.4)",
   headerHeight: "56px",
   maxWidth: "1280px",
   transition: (t = "0.2s") => t + " ease-in-out all",
