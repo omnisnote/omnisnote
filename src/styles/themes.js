@@ -2,6 +2,7 @@ import light from "./themes/light.js"
 import dark from "./themes/dark.js"
 
 const global = {
+  maxWidth: "960px",
   mobileBreakpoint: "@media (max-width: 480px)"
 }
 

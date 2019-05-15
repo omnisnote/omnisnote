@@ -85,8 +85,6 @@ function getNotebook(uid) {
   })
 }
 
-window.getNotebook = getNotebook
-
 function createNotebook(title = "new notebook") {
   // created seperately in order to return the uid
   const uid = getUser().collection("notebooks").doc().id

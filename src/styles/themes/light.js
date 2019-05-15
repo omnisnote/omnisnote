@@ -7,7 +7,6 @@ const light = {
   altMain: "#FF6D6B",
   selection: "rgba(0, 0, 0, 0.4)",
   headerHeight: "56px",
-  maxWidth: "1280px",
   transition: (t = "0.2s") => t + " ease-in-out all",
 }
 
