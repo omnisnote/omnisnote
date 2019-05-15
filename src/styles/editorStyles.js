@@ -1,4 +1,4 @@
-export default (theme, userSettings) => console.log(userSettings) || ({
+export default (theme, userSettings) => ({
   ".CodeMirror-scroll": {
     height: "auto",
   },
