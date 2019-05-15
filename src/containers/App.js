@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-ro
 import { Global, css, jsx } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
+import { Helmet } from "react-helmet"
+
 import auth from "../firebase/auth.js"
 import { createUser, getUser } from "../firebase/firestore.js"
 
@@ -72,6 +74,14 @@ export default class App extends Component {
                   backgroundColor: theme.selection
                 },
               })} />
+              <Helmet>
+                { this.state.userSettings.mainFont && (
+                  <link href={"https://fonts.googleapis.com/css?family=" + this.state.userSettings.mainFont.replace(/ /g, "+") + ":400,400i,700"} rel="stylesheet" />
+                ) }
+                { this.state.userSettings.monoFont && (
+                  <link href={"https://fonts.googleapis.com/css?family=" + this.state.userSettings.monoFont.replace(/ /g, "+")} rel="stylesheet" />
+                )}
+              </Helmet>
               { this.state.authed ? (<>
                   <Global styles={ theme => ({
                     body: {

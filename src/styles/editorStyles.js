@@ -1,4 +1,4 @@
-export default (theme, userSettings) => ({
+export default (theme, userSettings) => console.log(userSettings) || ({
   ".CodeMirror-scroll": {
     height: "auto",
   },
@@ -6,6 +6,7 @@ export default (theme, userSettings) => ({
     backgroundColor: theme.background,
     boxShadow: "0 8px 8px -6px rgba(0,0,0,0.2)",
     margin: "0 auto 0",
+    fontFamily: `"${userSettings.mainFont}", sans-serif`
   },
   ".CodeMirror-line::selection, .CodeMirror-line>span::selection, .CodeMirror-line>span>span::selection": {
     backgroundColor: theme.selection + " !important"

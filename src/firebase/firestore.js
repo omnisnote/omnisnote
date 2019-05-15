@@ -14,6 +14,8 @@ function createUser(user) {
       firestore.collection("users").doc(user.uid).set({
         settings: {
           theme: "light",
+          mainFont: "Open Sans",
+          monoFont: "Robot Mono",
           email: user.email // strictly for identification in the db, should not be used in the app
         }
       })

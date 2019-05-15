@@ -14,6 +14,8 @@ import Loading from "../components/Loading.js"
 
 import editorStyles from "../styles/editorStyles.js"
 
+import UserContext from "../UserContext"
+
 export default class Note extends Component {
   constructor(props) {
     super(props)
@@ -24,6 +26,8 @@ export default class Note extends Component {
 
     this.getNote(props.match.params.uid)
   }
+
+  static contextType = UserContext
 
   getNote(uid) {
     getTxtNote(uid).then(note => {
@@ -70,33 +74,35 @@ export default class Note extends Component {
 
   render() { return (
     <div className="note">
-      <Header active="note"/>
-      <Global styles={ theme => editorStyles(theme, { width: "960px" }) } />
-      <div css={ theme => ({
-        margin: "4px auto 0",
-        width: "95%",
-        maxWidth: theme.maxWidth,
-        [theme.mobileBreakpoint]: {
-          width: "100%",
-          margin: 0
-        }
-      })}>
-        { this.state.note ? ( <>
-          <Helmet>
-            <title>Omnisnote - { this.state.title }</title>
-          </Helmet>
-          <ConfirmInput defaultValue={ this.state.title } style={theme => ({
-            maxWidth: "480px",
-            input: { fontSize: "24px" },
-            [theme.mobileBreakpoint]: {
-              maxWidth: "100%",
-              margin: "0 0 8px",
-            }    
-          })} placeholder="title" onConfirm={ this.rename.bind(this) } />
-        </> ) : <Loading /> }
-        <textarea ref={ el => this.editor = el }
-                  style={{ display: "none" }}></textarea>
-      </div>
+      <UserContext.Consumer>{({ userSettings }) => <>
+        <Header active="note"/>
+        <Global styles={ theme => editorStyles(theme, userSettings) } />
+        <div css={ theme => ({
+          margin: "4px auto 0",
+          width: "95%",
+          maxWidth: theme.maxWidth,
+          [theme.mobileBreakpoint]: {
+            width: "100%",
+            margin: 0
+          }
+        })}>
+          { this.state.note ? ( <>
+            <Helmet>
+              <title>Omnisnote - { this.state.title }</title>
+            </Helmet>
+            <ConfirmInput defaultValue={ this.state.title } style={theme => ({
+              maxWidth: "480px",
+              input: { fontSize: "24px" },
+              [theme.mobileBreakpoint]: {
+                maxWidth: "100%",
+                margin: "0 0 8px",
+              }    
+            })} placeholder="title" onConfirm={ this.rename.bind(this) } />
+          </> ) : <Loading /> }
+          <textarea ref={ el => this.editor = el }
+                    style={{ display: "none" }}></textarea>
+        </div>
+      </> }</UserContext.Consumer>
     </div>
   )}
 }
