@@ -7,7 +7,18 @@ import UserContext from "../UserContext"
 
 import Header from "../components/Header.js"
 
-export default class Auth extends Component {
+const Option = props => (
+  <div css={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  }}>
+    <p>{ props.name }</p>
+    { props.children }
+  </div>
+)
+
+export default class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +30,7 @@ export default class Auth extends Component {
 
   render() { return (
     <UserContext.Consumer>
-      { ({ userData }) => (<>
+      { ({ userData, userSettings }) => (<>
           <Header />
           <div className="settings" css={ theme => ({
             margin: "4px auto 0",
@@ -34,7 +45,7 @@ export default class Auth extends Component {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginTop: "16px"
+              margin: "16px 0 32px"
             }) }>
               <h1 css={ theme => ({
                 fontWeight: 300,
@@ -57,6 +68,24 @@ export default class Auth extends Component {
                 auth.signOut()
                 window.location.reload()
               } }>Log out</button>
+            </div>
+            <div>
+              <Option name="Editor font">
+                <input type="text" defaultValue={ userSettings.mainFont }/>
+              </Option>
+              <Option name="Editor font size">
+                <input type="number" defaultValue={userSettings.editorFontSize} />
+              </Option>
+              <Option name="Code font">
+                <input type="text" defaultValue={ userSettings.monoFont }/>
+              </Option>
+              <Option name="Code font size">
+                <input type="number" defaultValue={userSettings.codeFontSize} />
+              </Option>
+              <Option name="line height">
+                <input type="number" defaultValue={ userSettings.lineHeight }/>
+              </Option>
+              <button>save</button>
             </div>
           </div>
       </>) }

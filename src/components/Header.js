@@ -126,9 +126,9 @@ export default function Header(props) {
               },
             })}>
               <NavLink active={props.active === "notes"} href="/notes/">Notes</NavLink>
-              <NavLink active={props.active === "templates"} href="/templates/">Templates</NavLink>
+              {/* <NavLink active={props.active === "templates"} href="/templates/">Templates</NavLink> */}
               <NavLink active={props.active === "notebooks"} href="/notebooks/">Notebooks</NavLink>
-              <NavLink active={props.active === "tags"} href="/tags/">Tags</NavLink>
+              {/* <NavLink active={props.active === "tags"} href="/tags/">Tags</NavLink> */}
             </ul>
             <div className="overlay" onClick={ e => toggleNav(false) }></div>
           </nav>
