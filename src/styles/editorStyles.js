@@ -8,6 +8,9 @@ export default (theme, userSettings) => console.log(userSettings) || ({
     margin: "0 auto 0",
     fontFamily: `"${userSettings.mainFont}", sans-serif`
   },
+  ".CodeMirror .cm-comment": {
+    fontFamily: `"${userSettings.monoFont}", monospace`
+  },
   ".CodeMirror-line::selection, .CodeMirror-line>span::selection, .CodeMirror-line>span>span::selection": {
     backgroundColor: theme.selection + " !important"
   },
