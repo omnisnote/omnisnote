@@ -1,6 +1,8 @@
 export default (theme, userSettings) => ({
   ".CodeMirror-scroll": {
     height: "auto",
+    fontSize: `${userSettings.editorFontSize}px`,
+    lineHeight: `${userSettings.lineHeight}rem`
   },
   ".CodeMirror": {
     backgroundColor: theme.background,
@@ -9,7 +11,11 @@ export default (theme, userSettings) => ({
     fontFamily: `"${userSettings.mainFont}", sans-serif`
   },
   ".CodeMirror .cm-comment": {
-    fontFamily: `"${userSettings.monoFont}", monospace`
+    fontFamily: `"${userSettings.monoFont}", monospace`,
+    fontSize: `${userSettings.codeFontSize}px`
+  },
+  ".cm-s-easymde .cm-comment:only-child::after, .cm-s-easymde .cm-comment.CodeMirror-selectedtext::after, .cm-s-easymde .cm-formatting-code-block:first-of-type::after": {
+    borderLeft: `2px solid ${theme.main}`
   },
   ".CodeMirror-line::selection, .CodeMirror-line>span::selection, .CodeMirror-line>span>span::selection": {
     backgroundColor: theme.selection + " !important"

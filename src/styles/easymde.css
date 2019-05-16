@@ -614,13 +614,19 @@ span.CodeMirror-selectedtext {
 	line-height: 110%
 }
 
-.cm-s-easymde .cm-comment:first-child::after {
+.cm-s-easymde .cm-formatting-code-block:first-child::after, 
+.cm-s-easymde .cm-comment:only-child::after,
+.cm-s-easymde .cm-comment.CodeMirror-selectedtext::after {
 	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background: rgba(0, 0, 0, .05);
+}
+
+.cm-s-easymde .cm-comment:not(:only-child) {
 	background: rgba(0, 0, 0, .05);
 }
 

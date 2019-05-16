@@ -60,7 +60,7 @@ export default class User extends Component {
                 borderRadius: "2px",
                 fontSize: "18px",
                 cursor: "pointer",
-                transition: theme.transition("0.1s"),
+                transition: theme.transition("0.2s"),
                 ":hover": {
                   backgroundColor: theme.altBody
                 }
