@@ -33,7 +33,7 @@ export default (theme, userSettings) => ({
     zIndex: 12,
     color: theme.color,
     backgroundColor: theme.background,
-    boxShadow: "0 4px 4px -2px rgba(0,0,0,0.2)",
+    boxShadow: "0 4px 8px 2px rgba(0,0,0,0.2)",
     [theme.mobileBreakpoint]: {
       display: "none"
     }

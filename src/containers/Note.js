@@ -31,7 +31,7 @@ export default class Note extends Component {
 
   getNote(uid) {
     getTxtNote(uid).then(note => {
-      this.setState({ 
+      this.setState({
         ...note, 
         note: true,
         editor: new EasyMDE({ 
@@ -46,6 +46,22 @@ export default class Note extends Component {
           },
           spellChecker: false,
         })
+      }, () => {
+        this.state.editor.codemirror.on("focus", e => {
+          this.setState({ hideHeader: true })
+        })
+        this.state.editor.codemirror.on("blur", e => {
+          this.setState({ hideHeader: false })
+        })
+        if(this.context.userSettings.autosave) {
+          this.autosave = setInterval(() => {
+            console.log("autosave")
+            this.saveNote(this.props.match.params.uid, {
+              ...this.state,
+              content: this.state.editor.value()
+            })
+          }, 30000) // every 30sec
+        }
       })
     })
   }
@@ -66,6 +82,7 @@ export default class Note extends Component {
       ...this.state,
       content: this.state.editor.value()
     })
+    clearInterval(this.autosave)
   }
   
   rename(e) {
@@ -75,7 +92,7 @@ export default class Note extends Component {
   render() { return (
     <div className="note">
       <UserContext.Consumer>{({ userSettings }) => <>
-        <Header active="note"/>
+        <Header active="note" hide={this.state.hideHeader}/>
         <Global styles={ theme => editorStyles(theme, userSettings) } />
         <div css={ theme => ({
           margin: "4px auto 0",
@@ -88,15 +105,16 @@ export default class Note extends Component {
         })}>
           { this.state.note ? ( <>
             <Helmet>
-              <title>Omnisnote - { this.state.title }</title>
+              <title>{ this.state.title }</title>
             </Helmet>
             <ConfirmInput defaultValue={ this.state.title } style={theme => ({
               maxWidth: "480px",
+              margin: "8px 0 32px",
               input: { fontSize: "24px" },
               [theme.mobileBreakpoint]: {
                 maxWidth: "100%",
                 margin: "0 0 8px",
-              }    
+              }
             })} placeholder="title" onConfirm={ this.rename.bind(this) } />
           </> ) : <Loading /> }
           <textarea ref={ el => this.editor = el }

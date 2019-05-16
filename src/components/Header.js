@@ -49,10 +49,11 @@ export default function Header(props) {
         position: "fixed",
         height: theme.headerHeight,
         width: "100%",
-        top: 0,
+        top: props.hide ? "-78px" : 0,
         left: 0,
         zIndex: 4000,
         backgroundColor: theme.background,
+        transition: theme.transition("0.3s"),
         boxShadow: "0 8px 12px -4px rgba(0,0,0,0.2)",
         "a": { // defined here because of react router Link weirdness
           height: "100%"
