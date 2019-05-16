@@ -97,7 +97,12 @@ function createNotebook(title = "new notebook") {
   return uid
 }
 
-window.createNotebook = createNotebook
+function setSettings(newSettings) {
+  getUser().set({ settings: newSettings }, { merge: true })
+}
+
+window.setSettings = setSettings
+window.getUser = getUser
 
 export default firestore
 export { 
@@ -109,5 +114,6 @@ export {
   setTxtNote,
   getNotebooks,
   createNotebook,
-  getNotebook
+  getNotebook,
+  setSettings
 }

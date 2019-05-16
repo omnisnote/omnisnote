@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { css, jsx } from '@emotion/core'
 import { auth, firebase } from "../firebase"
 
+import { setSettings } from "../firebase/firestore.js"
+
 import UserContext from "../UserContext"
 
 import Header from "../components/Header.js"
@@ -21,12 +23,14 @@ const Option = props => (
 export default class User extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-
-    }
+    this.state = {}
   }
 
   static contextType = UserContext
+
+  applySettings() {
+    setSettings(this.state)
+  }
 
   render() { return (
     <UserContext.Consumer>
@@ -71,21 +75,54 @@ export default class User extends Component {
             </div>
             <div>
               <Option name="Editor font">
-                <input type="text" defaultValue={ userSettings.mainFont }/>
+                <input 
+                  type="text" 
+                  name="mainFont"
+                  defaultValue={ userSettings.mainFont }
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
               </Option>
               <Option name="Editor font size">
-                <input type="number" defaultValue={userSettings.editorFontSize} />
+                <input 
+                  type="number" 
+                  name="editorFontSize"
+                  defaultValue={userSettings.editorFontSize} 
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
               </Option>
               <Option name="Code font">
-                <input type="text" defaultValue={ userSettings.monoFont }/>
+                <input 
+                  type="text" 
+                  name="monoFont"
+                  defaultValue={ userSettings.monoFont }
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
               </Option>
               <Option name="Code font size">
-                <input type="number" defaultValue={userSettings.codeFontSize} />
+                <input 
+                  type="number" 
+                  name="codeFontSize"
+                  defaultValue={userSettings.codeFontSize} 
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
               </Option>
-              <Option name="line height">
-                <input type="number" defaultValue={ userSettings.lineHeight }/>
+              <Option name="Line height">
+                <input 
+                  type="number" 
+                  name="lineHeight"
+                  defaultValue={ userSettings.lineHeight }
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
               </Option>
-              <button>save</button>
+              <Option name="Autosave">
+                <input 
+                  type="checkbox" 
+                  name="autosave"
+                  defaultChecked={ userSettings.autosave }
+                  onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                />
+              </Option>
+              <button onClick={ this.applySettings.bind(this) }>Apply Settings</button>
             </div>
           </div>
       </>) }
