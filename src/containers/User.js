@@ -8,6 +8,10 @@ import { setSettings } from "../firebase/firestore.js"
 import UserContext from "../UserContext"
 
 import Header from "../components/Header.js"
+import Loading from "../components/Loading.js"
+import Dropdown from "../atoms/Dropdown.js"
+
+import themes from "../styles/themes.js"
 
 const Option = props => (
   <div css={{
@@ -29,12 +33,17 @@ export default class User extends Component {
   static contextType = UserContext
 
   applySettings() {
-    setSettings(this.state)
+    setSettings({
+      ...this.context.userSettings,
+      ...this.state
+    }).then(_ => {
+      window.location.reload() // todo: make this not bad
+    })
   }
 
   render() { return (
     <UserContext.Consumer>
-      { ({ userData, userSettings }) => (<>
+      { ({ userData, userSettings, authed }) => authed ? (<>
           <Header />
           <div className="settings" css={ theme => ({
             margin: "4px auto 0",
@@ -69,8 +78,9 @@ export default class User extends Component {
                   backgroundColor: theme.altBody
                 }
               }) } onClick={ e => {
-                auth.signOut()
-                window.location.reload()
+                auth.signOut().then(_ => {
+                  window.location.reload()
+                })
               } }>Log out</button>
             </div>
             <div>
@@ -122,10 +132,17 @@ export default class User extends Component {
                   onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
                 />
               </Option>
+              <Option name="Theme">
+                <Dropdown 
+                  defaultValue={ userSettings.theme }
+                  options={ Object.entries(themes).map(theme => ({ name: theme[0], ...theme[1] })) }
+                  onChange={ e => this.setState({ theme: e.value }) }
+                />
+              </Option>
               <button onClick={ this.applySettings.bind(this) }>Apply Settings</button>
             </div>
           </div>
-      </>) }
+      </>) : <Loading /> }
     </UserContext.Consumer>
   )}
 }

@@ -15,14 +15,12 @@ import Note from "./Note.js"
 import Notebooks from "./Notebooks.js"
 import User from "./User.js"
 
-import UserContext from "../UserContext.js"
+import UserContext, { defaultSettings } from "../UserContext.js"
 import themes from "../styles/themes.js"
 
 function getLocalSettings() {
-  return JSON.parse(localStorage.getItem("settings"))
+  return JSON.parse(localStorage.getItem("settings") || "{}")
 }
-
-console.log(themes)
 
 export default class App extends Component {
   constructor(props) {
@@ -33,7 +31,7 @@ export default class App extends Component {
     this.state = {
       authed: auth.currentUser || false,
       userData: auth.currentUser || {},
-      userSettings: getLocalSettings() || { theme: "light" },
+      userSettings: { ...defaultSettings, ...getLocalSettings() },
       onAuth: (user => {
         if(!user) return
         createUser(user)
@@ -42,7 +40,7 @@ export default class App extends Component {
           this.setState({ 
             authed: !!user,
             userData: user,
-            userSettings: res.data().settings
+            userSettings: { ...this.state.userSettings, ...res.data().settings }
           })
         })
       }).bind(this),

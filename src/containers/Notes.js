@@ -30,8 +30,6 @@ export default class Notes extends Component {
       notebookData: null,
     }
 
-    console.log(auth)
-
     getNoteList(notebook).then(res => this.setState({ notes: res }))
     if(props.match.params.notebook) {
       getNotebook(notebook).then(res => this.setState({ notebookData: res }))

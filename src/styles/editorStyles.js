@@ -36,7 +36,7 @@ export default (theme, userSettings) => ({
     boxShadow: "0 4px 8px 2px rgba(0,0,0,0.2)",
     [theme.mobileBreakpoint]: {
       display: "none"
-    }
+    },
   },
   ".CodeMirror-cursor, .CodeMirror div.CodeMirror-secondarycursor": {
     borderLeft: "1.5px solid " + theme.main + " !important",

@@ -98,7 +98,7 @@ function createNotebook(title = "new notebook") {
 }
 
 function setSettings(newSettings) {
-  getUser().set({ settings: newSettings }, { merge: true })
+  return getUser().set({ settings: { ...newSettings} }, { merge: true })
 }
 
 window.setSettings = setSettings
