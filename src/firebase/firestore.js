@@ -3,6 +3,8 @@ import auth from "./auth"
 
 const firestore = firebase.firestore()
 
+firestore.enablePersistence()
+
 function getUser() {
   if(!auth.currentUser) throw new Error("user not authed")
   return firestore.collection("users").doc(auth.currentUser.uid)
