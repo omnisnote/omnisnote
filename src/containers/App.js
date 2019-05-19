@@ -29,7 +29,7 @@ export default class App extends Component {
     auth.onAuthStateChanged(user => this.state.onAuth(user))
 
     this.state = {
-      authed: auth.currentUser || false,
+      authed: !!auth.currentUser || false,
       userData: auth.currentUser || {},
       userSettings: { ...defaultSettings, ...getLocalSettings() },
       onAuth: (user => {
@@ -42,6 +42,7 @@ export default class App extends Component {
             userData: user,
             userSettings: { ...this.state.userSettings, ...res.data().settings }
           })
+          this.state.saveSettings()
         })
       }).bind(this),
       saveSettings: () => {
