@@ -1,7 +1,7 @@
 const dark = {
   textColor: "rgba(255, 255, 255, 0.85)",
   body: "#262428",
-  altBody: "#222222",
+  altBody: "#111",
   background: "#000000",
   main: "#FF6D6B",
   altMain: "#7B8CDE",

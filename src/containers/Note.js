@@ -16,6 +16,11 @@ import editorStyles from "../styles/editorStyles.js"
 
 import UserContext from "../UserContext"
 
+function hotkeyListener(e, that) {
+  if (e.ctrlKey && e.which === 83) that.saveNote(that.state.editor.value())
+  e.preventDefault()
+}
+
 export default class Note extends Component {
   constructor(props) {
     super(props)
@@ -53,21 +58,23 @@ export default class Note extends Component {
         this.state.editor.codemirror.on("blur", e => {
           this.setState({ hideHeader: false })
         })
+
+        window.addEventListener("keydown", e => hotkeyListener(e, this), false)
+
         if(this.context.userSettings.autosave) {
           this.autosave = setInterval(() => {
-            console.log("autosave")
-            this.saveNote(this.props.match.params.uid, {
-              ...this.state,
-              content: this.state.editor.value()
-            })
+            this.saveNote(this.state.editor.value())
           }, 30000) // every 30sec
         }
       })
     })
   }
 
-  saveNote(uid, state) {
-    setTxtNote(uid, state)
+  saveNote(content) {
+    setTxtNote(this.props.match.params.uid, {
+      ...this.state,
+      content
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -78,11 +85,10 @@ export default class Note extends Component {
   }
 
   componentWillUnmount() {
-    this.saveNote(this.props.match.params.uid, {
-      ...this.state,
-      content: this.state.editor.value()
-    })
+    this.saveNote(this.state.editor.value())
+
     clearInterval(this.autosave)
+    window.removeEventListener("keypress", hotkeyListener)
   }
   
   rename(e) {

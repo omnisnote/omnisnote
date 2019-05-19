@@ -10,13 +10,12 @@ const defaultUserImgURI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAAC
 const NavLink = props => (
   <Link to={ props.href }>
     <li css={ theme => ({
-      display: "inline-block",
+      display: "inline-flex",
       margin: "0 8px 0 0",
       padding: "0 12px",
       position: "relative",
       height: "100%",
       cursor: "pointer",
-      display: "inline-flex",
       alignItems: "center",
       borderBottom: "2px solid transparent",
       transition: theme.transition(),
