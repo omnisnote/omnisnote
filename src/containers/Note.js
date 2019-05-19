@@ -16,11 +16,6 @@ import editorStyles from "../styles/editorStyles.js"
 
 import UserContext from "../UserContext"
 
-function hotkeyListener(e, that) {
-  if (e.ctrlKey && e.which === 83) that.saveNote(that.state.editor.value())
-  e.preventDefault()
-}
-
 export default class Note extends Component {
   constructor(props) {
     super(props)
@@ -58,8 +53,11 @@ export default class Note extends Component {
         this.state.editor.codemirror.on("blur", e => {
           this.setState({ hideHeader: false })
         })
-
-        window.addEventListener("keydown", e => hotkeyListener(e, this), false)
+        this.state.editor.codemirror.setOption("extraKeys", {
+          ["Ctrl-S"]: e => {
+            this.saveNote(this.state.editor.value())
+          }
+        })
 
         if(this.context.userSettings.autosave) {
           this.autosave = setInterval(() => {
@@ -88,7 +86,6 @@ export default class Note extends Component {
     this.saveNote(this.state.editor.value())
 
     clearInterval(this.autosave)
-    window.removeEventListener("keypress", hotkeyListener)
   }
   
   rename(e) {
