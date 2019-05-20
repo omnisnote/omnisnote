@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
 
-import MaterialIcon from "material-icons-react"
+import Fab from "../atoms/Fab.js"
 
 import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
 import auth from '../firebase/auth.js'
@@ -92,22 +92,7 @@ export default class Notes extends Component {
         bottom: "24px",
         right: "24px"
       }) }>
-        <button css={theme => ({
-          width: "56px",
-          height: "56px",
-          backgroundColor: theme.main,
-          outline: "none",
-          borderRadius: "50%",
-          border: "none",
-          cursor: "pointer",
-          boxShadow: "0 4px 8px -2px rgba(0,0,0,0.4)",
-          transition: theme.transition("0.3s"),
-          ":hover": {
-            boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
-          }
-        })}
-        onClick={ this.createNote.bind(this) }
-        ><MaterialIcon icon="add" color="#fff" /></button>
+        <Fab onClick={ this.createNote.bind(this) } icon="add" />
       </div>
     </div>
   </> )}

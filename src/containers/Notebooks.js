@@ -9,6 +9,8 @@ import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
 import Notebook from "../components/Notebook.js"
 
+import Fab from "../atoms/Fab.js"
+
 import { getNotebooks, createNotebook } from "../firebase/firestore.js"
 
 export default class Notebooks extends Component {
@@ -94,28 +96,10 @@ export default class Notebooks extends Component {
       { this.state.notebooks ? <>{
         this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
       }</> : <Loading /> }
-      <button css={theme => ({
-        width: "56px",
-        height: "56px",
-        backgroundColor: theme.main,
-        outline: "none",
-        borderRadius: "50%",
-        border: "none",
-        cursor: "pointer",
-        boxShadow: "0 4px 8px -2px rgba(0,0,0,0.4)",
-        transition: theme.transition("0.3s"),
-        position: "fixed",
-        bottom: "24px",
-        right: "24px",
-        ":hover": {
-          boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
-        }
-      })}
-        onClick={ e => {
-          this.notebookName.focus()
-          this.setState({ showOverlay: true })
-        } }
-      ><MaterialIcon icon="add" color="#fff" /></button>
+      <Fab icon="add" onClick={e => {
+        this.notebookName.focus()
+        this.setState({ showOverlay: true })
+      }} />
     </div>
   </> )}
 }
