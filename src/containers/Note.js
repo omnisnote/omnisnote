@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { css, jsx, Global } from '@emotion/core'
 
 import { Helmet } from "react-helmet"
-
 import EasyMDE from "easymde"
 
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"

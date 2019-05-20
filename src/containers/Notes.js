@@ -86,14 +86,7 @@ export default class Notes extends Component {
           </div>
         </Link>
       )) : <Loading /> }
-
-      <div css={ theme => ({
-        position: "fixed",
-        bottom: "24px",
-        right: "24px"
-      }) }>
-        <Fab onClick={ this.createNote.bind(this) } icon="add" />
-      </div>
+      <Fab onClick={ this.createNote.bind(this) } icon="add" />
     </div>
   </> )}
 }

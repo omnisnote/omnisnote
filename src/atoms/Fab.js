@@ -18,7 +18,7 @@ export default function Fab(props) {
       transition: theme.transition("0.2s"),
       position: "fixed",
       bottom: "32px",
-      right:  "32px",
+      right: "32px",
       ":hover": {
         boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
       }
