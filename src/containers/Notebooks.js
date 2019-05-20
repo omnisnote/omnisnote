@@ -64,14 +64,30 @@ export default class Notebooks extends Component {
           transition: theme.transition("0.2s"),
           width: theme.maxWidth,
           padding: "24px",
-          borderRadius: "2px",
+          borderRadius: "6px",
           boxShadow: "0 8px 12px -16px rgba(0, 0, 0, 0.2)"
         }) }>
           <h1>Create a new Notebook</h1>
-          <form>
-            <input type="text" placeholder="name" ref={ el => this.notebookName = el }/>
+          <form css={{ position: "relative" }}>
+            <input css={ theme => ({
+              fontSize: "4rem",
+              margin: "2rem 0",
+              padding: "0.3rem",
+              borderBottom: "2px solid transparent",
+              transition: theme.transition(),
+              ":focus": {
+                borderBottom: `2px solid ${ theme.altBody }`
+              }
+            }) } type="text" placeholder="name" ref={ el => this.notebookName = el }/>
             {/* TODO: colorpicker */}
-            <button onClick={ e => this.createNotebook() }>create</button>
+            <button css={ theme => ({
+              backgroundColor: theme.main,
+              padding: "8px 12px",
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              borderRadius: "2px"
+            })} onClick={ e => this.createNotebook() }>create</button>
           </form>
         </div>
       </div>
