@@ -20,8 +20,8 @@ export default class Notebooks extends Component {
     getNotebooks().then(res => this.setState({ notebooks: res }))
   }
 
-  createBook() {
-    const uid = createNotebook("new notebook")
+  createNotebook() {
+    const uid = createNotebook(this.notebookName.value || "new notebook")
     this.props.history.push("/notebooks/" + uid + "/notes/")
   }
 
@@ -32,6 +32,49 @@ export default class Notebooks extends Component {
       width: "95%",
       maxWidth: theme.maxWidth,
     })}>
+      <div css={ theme => ({
+        position: "fixed",
+        top: 0,
+        left: 0,
+        height: "100vh",
+        width: "100%",
+        zIndex: 2000000,
+        opacity: this.state.showOverlay ? 1 : 0,
+        pointerEvents: this.state.showOverlay ? "auto" : "none",
+        transition: theme.transition("0.2s"),
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }) }>
+        <div onClick={e => this.setState({ showOverlay: false })} css={ theme => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100vh",
+          width: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        }) }>
+
+        </div>
+        <div css={ theme => ({
+          backgroundColor: theme.background,
+          position: "relative",
+          opacity: this.state.showOverlay ? 1 : 0,
+          top: this.state.showOverlay ? 0 : "-100px",
+          transition: theme.transition("0.2s"),
+          width: theme.maxWidth,
+          padding: "24px",
+          borderRadius: "2px",
+          boxShadow: "0 8px 12px -16px rgba(0, 0, 0, 0.2)"
+        }) }>
+          <h1>Create a new Notebook</h1>
+          <form>
+            <input type="text" placeholder="name" ref={ el => this.notebookName = el }/>
+            {/* TODO: colorpicker */}
+            <button onClick={ e => this.createNotebook() }>create</button>
+          </form>
+        </div>
+      </div>
       { this.state.notebooks ? <>{
         this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
       }</> : <Loading /> }
@@ -52,7 +95,10 @@ export default class Notebooks extends Component {
           boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
         }
       })}
-        onClick={ this.createBook.bind(this) }
+        onClick={ e => {
+          this.notebookName.focus()
+          this.setState({ showOverlay: true })
+        } }
       ><MaterialIcon icon="add" color="#fff" /></button>
     </div>
   </> )}
