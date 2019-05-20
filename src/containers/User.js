@@ -18,8 +18,7 @@ const Option = props => (
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: "8px auto",
-    maxWidth: "720px",
+    margin: "8px 0",
   }}>
     <p>{ props.name }</p>
     { props.children }
@@ -87,12 +86,43 @@ export default class User extends Component {
             } }>Log out</button>
           </div>
           <div css={ theme => ({
+            maxWidth: "960px",
+            margin: "0 auto",
             "input": {
               backgroundColor: theme.altBody,
               color: theme.textColor,
-              padding: "8px 16px"
+              padding: "8px 12px",
+              borderBottom: `2px solid transparent`,
+              transition: theme.transition(),
+              ":focus": {
+                borderBottom: `2px solid ${theme.main}`
+              }
             }
           }) }>
+            <p css={ theme => ({
+              margin: "12px 0 32px",
+              a: {
+                position: "relative",
+                display: "inline",
+                zIndex: 1,
+                "::after": {
+                  content: "''", 
+                  display: "block",
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  zIndex: 0,
+                  height: "50%",
+                  width: "100%",
+                  opacity: 0.2,
+                  backgroundColor: theme.main,
+                  transition: theme.transition()
+                },
+                ":hover::after": {
+                  height: "100%"
+                }
+              }
+            }) }>Fonts served from <a target="_blank" href="https://fonts.google.com">Google Fonts</a>. Any font hosted there should work, size may vary from font to font however.</p>
             <Option name="Editor font">
               <input 
                 type="text" 
@@ -159,6 +189,7 @@ export default class User extends Component {
               cursor: "pointer",
               boxShadow: "0 4px 12px -4px rgba(0, 0, 0, 0.2)",
               transition: theme.transition(),
+              fontSize: "1.04rem",
               ":hover": {
                 backgroundColor: theme.main
               }
