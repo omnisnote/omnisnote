@@ -17,6 +17,16 @@ export default (theme, userSettings) => ({
   ".cm-s-easymde .cm-comment:only-child::after, .cm-s-easymde .cm-comment.CodeMirror-selectedtext::after, .cm-s-easymde .cm-formatting-code-block:first-of-type::after": {
     borderLeft: `2px solid ${theme.main}`
   },
+  ".cm-hr::after": {
+    content: "''",
+    display: "block",
+    position: "absolute",
+    height: "1px",
+    top: "calc(50% + 0.5px)",
+    backgroundColor: theme.textColor,
+    opacity: 0.3,
+    width: "100%"
+  },
   ".CodeMirror-line::selection, .CodeMirror-line>span::selection, .CodeMirror-line>span>span::selection": {
     backgroundColor: theme.selection + " !important"
   },

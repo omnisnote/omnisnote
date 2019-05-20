@@ -13,6 +13,10 @@ a, a:hover, a:active, a:focus {
   border: none;
 }
 
+button::selection {
+  background-color: transparent;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }

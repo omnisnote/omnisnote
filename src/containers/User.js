@@ -52,10 +52,6 @@ export default class User extends Component {
           margin: "4px auto 0",
           width: "95%",
           maxWidth: theme.maxWidth,
-          [theme.mobileBreakpoint]: {
-            width: "100%",
-            margin: 0
-          }
         })}>
           <div css={ theme => ({
             display: "flex",
