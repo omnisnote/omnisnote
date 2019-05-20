@@ -9,8 +9,9 @@ import EasyMDE from "easymde"
 import { getTxtNote, setTxtNote } from "../firebase/firestore.js"
 
 import Header from "../components/Header.js"
-import ConfirmInput from "../components/ConfirmInput.js"
 import Loading from "../components/Loading.js"
+
+import ConfirmInput from "../atoms/ConfirmInput.js"
 
 import editorStyles from "../styles/editorStyles.js"
 
