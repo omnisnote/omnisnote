@@ -83,7 +83,7 @@ export default class Note extends Component {
   }
 
   componentWillUnmount() {
-    this.saveNote(this.state.editor.value())
+    if(this.state.editor) this.saveNote(this.state.editor.value())
 
     clearInterval(this.autosave)
   }

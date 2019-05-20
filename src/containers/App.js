@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import { Global, css, jsx } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 

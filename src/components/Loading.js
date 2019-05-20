@@ -19,10 +19,10 @@ const loader = keyframes`
 
 const Bar = ({ opacity, delay, time }) => (
   <div css={ theme => ({ 
-    backgroundColor: theme.main || "#7a42a5",
+    backgroundColor: theme.main || "#000",
     animation: `${loader} ${time} infinite ease-in-out ${delay}`,
     position: "absolute",
-    height: "4px",
+    height: "2px",
     opacity
   })}></div>
 )
@@ -33,7 +33,7 @@ export default function Loading(props) {
       position: "fixed",
       top: 0,
       left: 0,
-      height: "4px",
+      height: "2px",
       width: "100%",
       zIndex: 100000000,
     })}>
