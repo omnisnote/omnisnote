@@ -9,7 +9,9 @@ import UserContext from "../UserContext"
 
 import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
+
 import Dropdown from "../atoms/Dropdown.js"
+import Checkbox from "../atoms/Checkbox.js"
 
 import themes from "../styles/themes.js"
 
@@ -122,10 +124,10 @@ export default class User extends Component {
                   height: "100%"
                 }
               }
-            }) }>Fonts served from <a target="_blank" href="https://fonts.google.com">Google Fonts</a>. Any font hosted there should work, size may vary from font to font however.</p>
+            }) }>Fonts served from <a target="_blank" href="https://fonts.google.com">Google Fonts</a>. Any font hosted there should work, however size may vary from font to font. I recomend choosing a font that has bold and italic varients.</p>
             <Option name="Editor font">
               <input 
-                type="text" 
+                type="text"
                 name="mainFont"
                 defaultValue={ userSettings.mainFont }
                 onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
@@ -164,11 +166,9 @@ export default class User extends Component {
               />
             </Option>
             <Option name="Autosave">
-              <input 
-                type="checkbox" 
-                name="autosave"
+              <Checkbox
                 defaultChecked={ userSettings.autosave }
-                onChange={ e => this.setState({ [e.target.name]: e.target.value }) }
+                onChange={ e => this.setState({ autosave: e.value }) }
               />
             </Option>
             <Option name="Theme">
