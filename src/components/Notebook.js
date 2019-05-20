@@ -19,6 +19,7 @@ function getColor(color) {
   return lum < 127 ? "rgba(255, 255, 255, 0.85)" : "rgba(0, 0, 0, 0.85)"
 }
 
+
 export default function Notebook(props) {
   return ( <div css={ theme => ({ margin: "8px", maxWidth: "200px", }) }>
     <Link to={ props.uid + "/notes/"}>

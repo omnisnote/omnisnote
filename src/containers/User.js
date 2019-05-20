@@ -17,7 +17,9 @@ const Option = props => (
   <div css={{
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    margin: "8px auto",
+    maxWidth: "720px",
   }}>
     <p>{ props.name }</p>
     { props.children }
@@ -84,7 +86,13 @@ export default class User extends Component {
               })
             } }>Log out</button>
           </div>
-          <div>
+          <div css={ theme => ({
+            "input": {
+              backgroundColor: theme.altBody,
+              color: theme.textColor,
+              padding: "8px 16px"
+            }
+          }) }>
             <Option name="Editor font">
               <input 
                 type="text" 
@@ -140,7 +148,21 @@ export default class User extends Component {
                 onChange={ e => this.setState({ theme: e.value }) }
               />
             </Option>
-            <button onClick={ this.applySettings.bind(this) }>Apply Settings</button>
+            <button css={ theme => ({
+              margin: "0 auto",
+              backgroundColor: "transparent",
+              padding: "8px 12px",
+              borderRadius: "2px",
+              display: "block",
+              border: `4px solid ${theme.main}`,
+              color: theme.textColor,
+              cursor: "pointer",
+              boxShadow: "0 4px 12px -4px rgba(0, 0, 0, 0.2)",
+              transition: theme.transition(),
+              ":hover": {
+                backgroundColor: theme.main
+              }
+            }) } onClick={ this.applySettings.bind(this) }>Apply Settings</button>
           </div>
         </div>
       </>) : <Loading /> }
