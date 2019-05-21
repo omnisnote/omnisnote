@@ -4,7 +4,8 @@ import { createUser, getUser } from "./firebase/firestore.js"
 
 const store = {
   userSettings: { ...defaultSettings, ...getLocalSettings() },
-  notes: {}
+  notes: {},
+  notebooks: {}
 }
 
 window.erots = store

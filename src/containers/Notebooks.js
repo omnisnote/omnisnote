@@ -19,9 +19,12 @@ export default class Notebooks extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      notebooks: store.notebooks
+      notebooks: Object.entries(store.notebooks).map(n => ({ uid: n[0], ...n[1] }))
     }
     getNotebooks().then(res => {
+      res.forEach(n => {
+        store.notebooks[n.uid] = n
+      })
       this.setState({ notebooks: res })
     })
   }

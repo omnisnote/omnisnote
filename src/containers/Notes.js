@@ -35,8 +35,12 @@ export default class Notes extends Component {
       store.notes[notebook] = res
       this.setState({ notes: store.notes[notebook] })
     })
+
     if(props.match.params.notebook) {
-      getNotebook(notebook).then(res => this.setState({ notebookData: res }))
+      getNotebook(notebook).then(res => {
+        store.notebooks[notebook] = res
+        this.setState({ notebookData: store.notebooks[notebook] })
+      })
     }
   }
 
