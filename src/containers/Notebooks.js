@@ -18,9 +18,11 @@ import { getNotebooks, createNotebook } from "../firebase/firestore.js"
 export default class Notebooks extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       notebooks: Object.entries(store.notebooks).map(n => ({ uid: n[0], ...n[1] }))
     }
+
     getNotebooks().then(res => {
       res.forEach(n => {
         store.notebooks[n.uid] = n
@@ -69,8 +71,8 @@ export default class Notebooks extends Component {
           backgroundColor: theme.background,
           position: "relative",
           opacity: this.state.showOverlay ? 1 : 0,
-          top: this.state.showOverlay ? 0 : "-100px",
-          transition: theme.transition("0.2s"),
+          top: this.state.showOverlay ? 0 : "-50px",
+          transition: theme.transition("0.4s"),
           maxWidth: theme.maxWidth,
           width: "95%",
           padding: "24px",
