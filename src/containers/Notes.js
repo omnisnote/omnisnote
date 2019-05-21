@@ -10,6 +10,8 @@ import Fab from "../atoms/Fab.js"
 
 import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
 
+import store from "../store.js"
+
 const P = props => (
   <span css={ theme => ({ 
     borderRight: (props.last ? "" : ("1px solid " + theme.body)),
@@ -25,11 +27,14 @@ export default class Notes extends Component {
     const notebook = props.match.params.notebook || "__NONE__"
     this.state = {
       notebook,
-      notes: null,
       notebookData: null,
+      notes: store.notes[notebook],
     }
 
-    getNoteList(notebook).then(res => this.setState({ notes: res }))
+    getNoteList(notebook).then(res => {
+      store.notes[notebook] = res
+      this.setState({ notes: store.notes[notebook] })
+    })
     if(props.match.params.notebook) {
       getNotebook(notebook).then(res => this.setState({ notebookData: res }))
     }

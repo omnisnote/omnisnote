@@ -3,7 +3,8 @@ import { defaultSettings } from "./UserContext.js"
 import { createUser, getUser } from "./firebase/firestore.js"
 
 const store = {
-  userSettings: { ...defaultSettings, ...getLocalSettings() }
+  userSettings: { ...defaultSettings, ...getLocalSettings() },
+  notes: {}
 }
 
 window.erots = store
