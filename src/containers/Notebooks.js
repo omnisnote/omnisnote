@@ -5,6 +5,8 @@ import { Link } from "react-router-dom"
 
 import MaterialIcon from "material-icons-react"
 
+import store from "../store.js"
+
 import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
 import Notebook from "../components/Notebook.js"
@@ -17,9 +19,11 @@ export default class Notebooks extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      notebooks: null
+      notebooks: store.notebooks
     }
-    getNotebooks().then(res => this.setState({ notebooks: res }))
+    getNotebooks().then(res => {
+      this.setState({ notebooks: res })
+    })
   }
 
   createNotebook() {

@@ -7,7 +7,6 @@ import { ThemeProvider } from 'emotion-theming'
 import { Helmet } from "react-helmet"
 
 import auth from "../firebase/auth.js"
-import { createUser, getUser } from "../firebase/firestore.js"
 
 import Auth from "./Auth.js"
 import Notes from "./Notes.js"
@@ -16,46 +15,24 @@ import Notebooks from "./Notebooks.js"
 import User from "./User.js"
 
 import UserContext, { defaultSettings } from "../UserContext.js"
-import themes from "../styles/themes.js"
+import store, { onAuth } from "../store.js"
 
-function getLocalSettings() {
-  return JSON.parse(localStorage.getItem("settings") || "{}")
-}
+import themes from "../styles/themes.js"
 
 export default class App extends Component {
   constructor(props) {
     super(props)
 
-    auth.onAuthStateChanged(user => this.state.onAuth(user))
-
-    this.state = {
-      authed: !!auth.currentUser || false,
-      userData: auth.currentUser || {},
-      userSettings: { ...defaultSettings, ...getLocalSettings() },
-      onAuth: (user => {
-        if(!user) return
-        createUser(user)
-        getUser().get().then(res => {
-          if(!res.exists) return
-          this.setState({ 
-            authed: !!user,
-            userData: user,
-            userSettings: { ...this.state.userSettings, ...res.data().settings }
-          })
-          this.state.saveSettings()
-        })
-      }).bind(this),
-      saveSettings: () => {
-        localStorage.setItem("settings", JSON.stringify(this.state.userSettings))
-      }
-    }
+    auth.onAuthStateChanged(user => {
+      onAuth(user).then(e => this.forceUpdate())
+    })
   }
 
   render() { return (
     <div className="app">
-      <UserContext.Provider value={ this.state }>
+      <UserContext.Provider value={ store }>
           <Router>
-            <ThemeProvider theme={ themes[this.state.userSettings.theme] }>
+            <ThemeProvider theme={ themes[store.userSettings.theme] }>
               {/* authed */}
               <Global styles={ theme => ({
                 body: {
@@ -74,14 +51,14 @@ export default class App extends Component {
                 },
               })} />
               <Helmet>
-                { this.state.userSettings.mainFont && (
-                  <link href={"https://fonts.googleapis.com/css?family=" + this.state.userSettings.mainFont.replace(/ /g, "+") + ":400,400i,700"} rel="stylesheet" />
+                { store.userSettings.mainFont && (
+                  <link href={"https://fonts.googleapis.com/css?family=" + store.userSettings.mainFont.replace(/ /g, "+") + ":400,400i,700"} rel="stylesheet" />
                 ) }
-                { this.state.userSettings.monoFont && (
-                  <link href={"https://fonts.googleapis.com/css?family=" + this.state.userSettings.monoFont.replace(/ /g, "+")} rel="stylesheet" />
+                { store.userSettings.monoFont && (
+                  <link href={"https://fonts.googleapis.com/css?family=" + store.userSettings.monoFont.replace(/ /g, "+")} rel="stylesheet" />
                 )}
               </Helmet>
-              { this.state.authed ? (<>
+              { store.authed ? (<>
                   <Global styles={ theme => ({
                     body: {
                       marginTop: theme.headerHeight,
