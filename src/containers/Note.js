@@ -111,16 +111,18 @@ export default class Note extends Component {
             <Helmet>
               <title>{ this.state.title }</title>
             </Helmet>
-            <ConfirmInput defaultValue={ this.state.title } style={theme => ({
-              maxWidth: "480px",
-              margin: "8px 0 32px",
-              input: { fontSize: "24px" },
-              [theme.mobileBreakpoint]: {
-                maxWidth: "100%",
-                margin: "0 0 8px",
-              }
-            })} placeholder="title" onConfirm={ this.rename.bind(this) } />
-          </> ) : <Loading /> }
+            <div>
+              <ConfirmInput defaultValue={ this.state.title } style={theme => ({
+                maxWidth: "480px",
+                margin: "8px 0 32px",
+                input: { fontSize: "24px" },
+                [theme.mobileBreakpoint]: {
+                  maxWidth: "100%",
+                  margin: "0 0 8px",
+                }
+              })} placeholder="title" onConfirm={ this.rename.bind(this) } />
+            </div>
+            </> ) : <Loading /> }
           <textarea ref={ el => this.editor = el }
                     style={{ display: "none" }}></textarea>
         </div>

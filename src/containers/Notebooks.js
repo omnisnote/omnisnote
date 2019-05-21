@@ -64,7 +64,7 @@ export default class Notebooks extends Component {
           left: 0,
           height: "100vh",
           width: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
         }) }>
 
         </div>
@@ -77,8 +77,8 @@ export default class Notebooks extends Component {
           maxWidth: theme.maxWidth,
           width: "95%",
           padding: "24px",
-          borderRadius: "6px",
-          boxShadow: "0 8px 12px -16px rgba(0, 0, 0, 0.2)"
+          borderRadius: "2px",
+          boxShadow: "0 8px 32px -16px rgba(0,0,0,0.5)"
         }) }>
           <h1>Create a new Notebook</h1>
           <form css={{ position: "relative" }}>
