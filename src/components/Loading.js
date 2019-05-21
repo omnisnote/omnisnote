@@ -31,7 +31,7 @@ export default function Loading(props) {
   return (
     <div css={ theme => ({
       position: "fixed",
-      top: 0,
+      top: props.center ? "50vh" : 0,
       left: 0,
       height: "2px",
       width: "100%",

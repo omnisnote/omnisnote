@@ -8,16 +8,8 @@ import "./styles/style.css"
 import "./styles/easymde.css"
 import Loading from "./components/Loading.js"
 
-//HACK: used in order to fix automatic url redirection
-let authListener = auth.onAuthStateChanged(e => {
-    authListener()
-    ReactDOM.render((
-        <App />
-    ), document.getElementById('root'))
-})
-
 ReactDOM.render((
-    <Loading />
+    <App />
 ), document.getElementById('root'))
 
 serviceWorker.register()
