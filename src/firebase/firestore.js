@@ -103,8 +103,9 @@ function setSettings(newSettings) {
   return getUser().set({ settings: { ...newSettings} }, { merge: true })
 }
 
-window.setSettings = setSettings
-window.getUser = getUser
+function setNotebookMeta(uid, meta) {
+  getUser().collection("notebooks").doc(uid).update(meta)
+}
 
 export default firestore
 export { 
@@ -117,5 +118,6 @@ export {
   getNotebooks,
   createNotebook,
   getNotebook,
-  setSettings
+  setSettings,
+  setNotebookMeta
 }

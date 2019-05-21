@@ -3,14 +3,15 @@ import React, { Component } from 'react'
 import { css, jsx } from '@emotion/core'
 import { Link } from "react-router-dom"
 
+import store from "../store.js"
+
+import { getNoteList, setNotebookMeta, createTxtNote, getNotebook } from "../firebase/firestore.js"
+
 import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
 
 import Fab from "../atoms/Fab.js"
-
-import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
-
-import store from "../store.js"
+import ConfirmInput from "../atoms/ConfirmInput.js"
 
 const P = props => (
   <span css={ theme => ({ 
@@ -61,6 +62,20 @@ export default class Notes extends Component {
     this.props.history.push("/note/" + uid)
   }
 
+  renameBook(e) {
+    if(this.state.notebook !== "__NONE__") {
+      this.setState({
+        notebookData: {
+          ...this.state,
+          title: e.target.value
+        }
+      })
+      setNotebookMeta(this.state.notebook, {
+        title: e.target.value
+      })
+    }
+  }
+
   render() { return ( <>
     <Header active="notes" />
     <div className="notes" css={ theme => ({
@@ -72,7 +87,21 @@ export default class Notes extends Component {
         fontSize: "42px",
         fontWeight: 300,
         margin: "8px 0 16px"
-      }}>{ this.state.notebookData ? (this.state.notebookData.title) : "Notes" }</h1>
+      }}>{ this.state.notebookData ? (
+        <ConfirmInput defaultValue={ this.state.notebookData.title } style={ theme => ({
+          input: {
+            fontSize: "2rem",
+            background: "transparent !important",
+            boxShadow: "none !important",
+            border: "1px solid transparent",
+            borderRadius: "6px",
+            transition: theme.transition(),
+            ":hover, :focus": {
+              border: `1px solid ${theme.altBody}`
+            }
+          }
+        }) } onConfirm={ e => this.renameBook(e) }/>
+      ) : "Notes" }</h1>
       { this.state.notes ? this.state.notes.length ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({
