@@ -23,7 +23,7 @@ export default function Fab(props) {
         boxShadow: "0 8px 16px -4px rgba(0,0,0,0.4)",
       }
     })}
-    onClick={ e => this.props.onClick && this.props.onClick(e) }
+    onClick={ e => props.onClick && props.onClick(e) }
     ><MaterialIcon icon={props.icon} color="#fff" /></button>
   )
 }
