@@ -41,6 +41,7 @@ export default class Notebooks extends Component {
     <div css={ theme => ({
       margin: "4px auto 0",
       width: "95%",
+      paddingTop: (theme.headerHeight.split("px")[0] / 3) + "px",
       maxWidth: theme.maxWidth,
     })}>
       <div css={ theme => ({
@@ -100,7 +101,8 @@ export default class Notebooks extends Component {
               bottom: 0,
               right: 0,
               borderRadius: "2px",
-              cursor: "pointer"
+              cursor: "pointer",
+              color: theme.textOnMain,
             })} onClick={ e => this.createNotebook() }>create</button>
           </form>
         </div>

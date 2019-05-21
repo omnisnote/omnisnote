@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { css, jsx } from '@emotion/core'
 import { Link } from "react-router-dom"
 
+import { Helmet } from "react-helmet"
+
 import store from "../store.js"
 
 import { getNoteList, setNotebookMeta, createTxtNote, getNotebook } from "../firebase/firestore.js"
@@ -78,16 +80,20 @@ export default class Notes extends Component {
 
   render() { return ( <>
     <Header active="notes" />
+    <Helmet>
+      <title>{ (this.state.notebookData && this.state.notebookData.title) || "notes" }</title>
+    </Helmet>
     <div className="notes" css={ theme => ({
-      margin: "14px auto 0",
+      margin: "0 auto",
       width: "95%",
+      paddingTop: (theme.headerHeight.split("px")[0] / 3) + "px",
       maxWidth: theme.maxWidth
     })}>
       <h1 css={{
         fontSize: "42px",
         fontWeight: 300,
         margin: "8px 0 16px"
-      }}>{ this.state.notebookData ? (
+      }}>{ this.state.notebookData ? ( <>
         <ConfirmInput defaultValue={ this.state.notebookData.title } style={ theme => ({
           input: {
             fontSize: "2rem",
@@ -101,7 +107,7 @@ export default class Notes extends Component {
             }
           }
         }) } onConfirm={ e => this.renameBook(e) }/>
-      ) : "Notes" }</h1>
+      </>) : "Notes" }</h1>
       { this.state.notes ? this.state.notes.length ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({

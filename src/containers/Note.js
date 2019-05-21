@@ -101,6 +101,7 @@ export default class Note extends Component {
           margin: "4px auto 0",
           width: "95%",
           maxWidth: theme.maxWidth,
+          paddingTop: (theme.headerHeight.split("px")[0] / 3) + "px",
           [theme.mobileBreakpoint]: {
             width: "100%",
             margin: 0
