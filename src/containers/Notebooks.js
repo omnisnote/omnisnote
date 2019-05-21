@@ -103,9 +103,9 @@ export default class Notebooks extends Component {
           </form>
         </div>
       </div>
-      { this.state.notebooks ? <>{
+      { this.state.notebooks ? <> {
         this.state.notebooks.map((notebook, i) => <Notebook key={i} { ...notebook }/>)
-      }</> : <Loading /> }
+      } </> : <Loading /> }
       <Fab icon="add" onClick={e => {
         this.notebookName.focus()
         this.setState({ showOverlay: true })

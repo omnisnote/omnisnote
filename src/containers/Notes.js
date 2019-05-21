@@ -27,7 +27,7 @@ export default class Notes extends Component {
     const notebook = props.match.params.notebook || "__NONE__"
     this.state = {
       notebook,
-      notebookData: null,
+      notebookData: store.notebooks[notebook],
       notes: store.notes[notebook],
     }
 
@@ -73,7 +73,7 @@ export default class Notes extends Component {
         fontWeight: 300,
         margin: "8px 0 16px"
       }}>{ this.state.notebookData ? (this.state.notebookData.title) : "Notes" }</h1>
-      { this.state.notes ? this.state.notes.map((note, i) => (
+      { this.state.notes ? this.state.notes.length ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({
             backgroundColor: theme.background,
@@ -93,7 +93,7 @@ export default class Notes extends Component {
             {/* should also show last edit time, and tags */}
           </div>
         </Link>
-      )) : <>
+      )) : <p>there's nothing here</p> : <>
         <Loading />
       </> }
       <Fab onClick={ this.createNote.bind(this) } icon="add" />
