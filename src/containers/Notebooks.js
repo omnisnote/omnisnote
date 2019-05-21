@@ -64,7 +64,8 @@ export default class Notebooks extends Component {
           opacity: this.state.showOverlay ? 1 : 0,
           top: this.state.showOverlay ? 0 : "-100px",
           transition: theme.transition("0.2s"),
-          width: theme.maxWidth,
+          maxWidth: theme.maxWidth,
+          width: "95%",
           padding: "24px",
           borderRadius: "6px",
           boxShadow: "0 8px 12px -16px rgba(0, 0, 0, 0.2)"
@@ -73,10 +74,11 @@ export default class Notebooks extends Component {
           <form css={{ position: "relative" }}>
             <input css={ theme => ({
               fontSize: "4rem",
-              margin: "2rem 0",
+              margin: "2rem 0 calc(2rem + 64px)",
               padding: "0.3rem",
               borderBottom: "2px solid transparent",
               transition: theme.transition(),
+              width: "100%",
               ":focus": {
                 borderBottom: `2px solid ${ theme.altBody }`
               }
@@ -88,7 +90,8 @@ export default class Notebooks extends Component {
               position: "absolute",
               bottom: 0,
               right: 0,
-              borderRadius: "2px"
+              borderRadius: "2px",
+              cursor: "pointer"
             })} onClick={ e => this.createNotebook() }>create</button>
           </form>
         </div>

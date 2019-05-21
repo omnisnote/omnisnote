@@ -9,7 +9,6 @@ import Loading from "../components/Loading.js"
 import Fab from "../atoms/Fab.js"
 
 import { getNoteList, createTxtNote, getNotebook } from "../firebase/firestore.js"
-import auth from '../firebase/auth.js'
 
 const P = props => (
   <span css={ theme => ({ 
@@ -64,7 +63,7 @@ export default class Notes extends Component {
         fontSize: "42px",
         fontWeight: 300,
         margin: "8px 0 16px"
-      }}>{ this.state.notebookData ? ("Notebook - " + this.state.notebookData.title) : "Notes" }</h1>
+      }}>{ this.state.notebookData ? (this.state.notebookData.title) : "Notes" }</h1>
       { this.state.notes ? this.state.notes.map((note, i) => (
         <Link to={ "/note/" + note.uid } key={i}>
           <div css={ theme => ({
@@ -85,7 +84,9 @@ export default class Notes extends Component {
             {/* should also show last edit time, and tags */}
           </div>
         </Link>
-      )) : <Loading /> }
+      )) : <>
+        <Loading />
+      </> }
       <Fab onClick={ this.createNote.bind(this) } icon="add" />
     </div>
   </> )}
