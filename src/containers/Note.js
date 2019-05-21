@@ -11,6 +11,7 @@ import Header from "../components/Header.js"
 import Loading from "../components/Loading.js"
 
 import ConfirmInput from "../atoms/ConfirmInput.js"
+import DotButton from "../atoms/DotButton.js"
 
 import editorStyles from "../styles/editorStyles.js"
 
@@ -113,14 +114,32 @@ export default class Note extends Component {
             </Helmet>
             <div>
               <ConfirmInput defaultValue={ this.state.title } style={theme => ({
-                maxWidth: "480px",
+                maxWidth: "50%",
                 margin: "8px 0 32px",
+                display: "inline-block",
                 input: { fontSize: "24px" },
                 [theme.mobileBreakpoint]: {
                   maxWidth: "100%",
-                  margin: "0 0 8px",
+                  width: "100%",
+                  margin: "0 0 16px",
+                  input: {
+                    width: "100%",
+                  }
                 }
               })} placeholder="title" onConfirm={ this.rename.bind(this) } />
+              <div css={ theme => ({
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                width: "50%",
+                [theme.mobileBreakpoint]: {
+                  display: "none"
+                }
+              }) }>
+                <DotButton icon="label" />
+                <DotButton icon="delete" />
+                <DotButton icon="cloud_download" />
+              </div>
             </div>
             </> ) : <Loading /> }
           <textarea ref={ el => this.editor = el }
