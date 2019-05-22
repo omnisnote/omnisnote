@@ -1,5 +1,6 @@
 /** @jsx jsx */
-import { css, jsx, keyframes } from '@emotion/core'
+import React from 'react'
+import { css, jsx, keyframes, Global } from '@emotion/core'
 
 const loader = keyframes`
   from {
@@ -28,8 +29,7 @@ const Bar = ({ opacity, delay, time, theme }) => (
 )
 
 export default function Loading(props) {
-  if(props.center) document.body.style.backgroundColor = props.theme ? props.theme.body : ""
-  return (
+  return (<>
     <div css={ theme => ({
       position: "fixed",
       top: props.center ? "50vh" : 0,
@@ -43,5 +43,12 @@ export default function Loading(props) {
       <Bar theme={ props.theme } opacity="0.6" delay="1s"   time="1s"/>
       <Bar theme={ props.theme } opacity="0.6" delay="1.5s" time="1.5s"/>
     </div>
-  )
+    {props.center && 
+      <Global styles={ theme => ({
+        body: {
+          backgroundColor: props.theme ? props.theme.body : theme.body,
+        },
+      }) }/>
+    }
+  </>)
 }
