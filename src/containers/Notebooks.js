@@ -89,6 +89,8 @@ export default class Notebooks extends Component {
               borderBottom: "2px solid transparent",
               transition: theme.transition(),
               width: "100%",
+              background: "transparent",
+              color: theme.textColor,
               ":focus": {
                 borderBottom: `2px solid ${ theme.altBody }`
               }

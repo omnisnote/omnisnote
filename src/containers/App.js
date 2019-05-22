@@ -15,7 +15,7 @@ import Notebooks from "./Notebooks.js"
 import User from "./User.js"
 
 import UserContext, { defaultSettings } from "../UserContext.js"
-import store, { onAuth } from "../store.js"
+import store, { onAuth, getLocalSettings } from "../store.js"
 
 import themes from "../styles/themes.js"
 
@@ -94,7 +94,7 @@ export default class App extends Component {
               </ThemeProvider>
             </Router>
           </UserContext.Provider>
-        ) : <Loading center />
+        ) : <Loading center theme={ themes[getLocalSettings().theme] }/>
       }
     </div>
   )}

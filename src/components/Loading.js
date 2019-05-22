@@ -17,9 +17,9 @@ const loader = keyframes`
   }
 `
 
-const Bar = ({ opacity, delay, time }) => (
-  <div css={ theme => ({ 
-    backgroundColor: theme.main || "#000",
+const Bar = ({ opacity, delay, time, theme }) => (
+  <div css={ th => ({ 
+    backgroundColor: (theme && theme.main) || th.main || "#000",
     animation: `${loader} ${time} infinite ease-in-out ${delay}`,
     position: "absolute",
     height: "2px",
@@ -28,6 +28,7 @@ const Bar = ({ opacity, delay, time }) => (
 )
 
 export default function Loading(props) {
+  if(props.center) document.body.style.backgroundColor = props.theme ? props.theme.body : ""
   return (
     <div css={ theme => ({
       position: "fixed",
@@ -36,10 +37,11 @@ export default function Loading(props) {
       height: "2px",
       width: "100%",
       zIndex: 100000000,
+      backgroundColor: (props.theme && props.theme.body) || theme.body || "#fff"
     })}>
-      <Bar opacity="0.6" delay="0.5s" time="1.8s"/>
-      <Bar opacity="0.6" delay="1s"   time="1s"/>
-      <Bar opacity="0.6" delay="1.5s" time="1.5s"/>
+      <Bar theme={ props.theme } opacity="0.6" delay="0.5s" time="1.8s"/>
+      <Bar theme={ props.theme } opacity="0.6" delay="1s"   time="1s"/>
+      <Bar theme={ props.theme } opacity="0.6" delay="1.5s" time="1.5s"/>
     </div>
   )
 }
